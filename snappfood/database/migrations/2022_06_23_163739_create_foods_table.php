@@ -17,10 +17,14 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(FoodsCategory::class);
-            $table->foreignIdFor(Restaurantowner::class);
-            $table->string('name');
-            $table->string('description');
+            $table->foreignIdFor(Restaurantowner::class);//which restaurant owner makes the this food.
+            $table->string('name');//name food.
+            $table->string('rawmaterial');//material foods.
+            $table->string('price');//food price.
+            $table->string('image')->default('0');//image food.
+            $table->string('foodsparty')->default('0');//food party.
+            $table->string('foodscategory');//which food categor.
+            $table->string('discounts')->default('0');//discount food.
             $table->timestamps();
         });
     }

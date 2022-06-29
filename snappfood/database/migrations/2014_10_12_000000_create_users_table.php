@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->boolean('isAdmin')->default('0');
             $table->boolean('role')->default('0');//1=>restourant owner and 0 is mean user;
-            $table->boolean('ckeckprofile_resturant')->default('0');
+            $table->boolean('checkprofile_resturant')->default('0');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

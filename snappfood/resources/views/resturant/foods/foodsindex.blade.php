@@ -1,146 +1,169 @@
 <x-app-layout>
     <x-slot name="header">
+        <div class="flex gap-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           <a href="{{ route('foods.create') }}"><p class="text-green-600/100">Create new Foods</p></a>
+                <a href="{{ url('/resturantowner/foods') }}" class='text-green-700'>Foods </a>
         </h2>
+
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+            <a href="{{ route('foods.create') }}" class='text-green-700'> Create Food +</a>
+        </h2>
+        </div>
+        @if (session('message'))
+            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+
     </x-slot>
-    @if (session('message'))
-    <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-        {{ session('message') }}
-    </div>
-    @endif
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+                <tr>
+                    <th scope="col-10" class="px-6 py-3">
+                        picturs
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Foods Name
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Raw Materials
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Prices
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Food Categories
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Food discounts
+                    </th>
+                    <th scope="col-10" class="px-6 py-3">
+                        Food party
+                    </th>
+
+                    <th scope="col-2" class="px-6 py-3">
+                        Actions
+                    </th>
+                </tr>
 
 
-{{--
-    @forelse ($allfoods as $foods )
+            </thead>
+            <tbody>
+                <!---Foreach---->
+            @isset($data)
+                @foreach ($data as $foods)
 
-    <div class="container ml-16">
-    <div class="flex mb-1 items-center">
-        <p class="w-full text-grey-darkest">id:{{ $foods->name }} resturants_id:{{ $foods->resturants_id }}</p>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <form action="{{ url("/resturantowner/foods/{$foods->id}") }}" method="post">
+                    <td class="px-6 py-4 text-center">
+                    <img class="w-25 h-25 " src="{{ asset('/images/'.$foods->image) }}" alt="no image">
+                    </td>
 
+                    <td class="px-6 py-4 text-center">
+                        {{$foods->name}}
+                    </td>
 
-        <a href="{{ url("admin/foodscategory/{$foods->id}/edit") }}"><button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="submit">
-            Edite
-          </button>
-        </a>
-          <form action="{{ url("admin/foodscategory/{$foods->id}/edit")}}" method="post">
-            @csrf
-            @method('delete')
-          <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded  text-black bg-red-600" type="submit">delete</button>
-        </form>
-    </div>
-  </div>
-    @empty
-    <div class="flex mb-4 items-center">
-        <p class="w-full text-grey-darkest">Add new <a href="{{ route('foodscategory.create') }}">FoodsCategory</a> press link in navbar</p>
+                    <td class="px-6 py-4 text-center">
+                        {{$foods->rawmaterial}}
+                    </td>
 
-        <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="submit">
-            update
-          </button>
+                    <td class="px-6 py-4 text-center">
+                        {{$foods->price}}
+                    </td>
 
-          <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded  text-black bg-red-600" type="submit">delete</button>
+                    <td class="px-6 py-4 text-center">
+                        {{$foods->foodscategory}}
+                    </td>
 
-    </div>
-
-
-@endforelse --}}
-
-<!----->
-
-<div class="max-w-2xl mx-auto">
-
-	<div class="flex flex-col">
-    <div class="overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="inline-block min-w-full align-middle">
-            <div class="overflow-hidden ">
-                <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                    <thead class="bg-gray-100 dark:bg-gray-700">
-                        <tr>
-                            <th scope="col" class="p-4">
-
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                id
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                foods_category_id
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                resturants_id
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                name
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                description
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                            @forelse ($allfoods as $foods )
-                            <td class="p-4 w-4">
+                    <td class="px-6 py-4 text-center">
+                    @if ( $foods->discounts !== 'Admin offer for discount')
+                         {{$foods->discounts}}
+                    @else
+                        &#10060;
+                    @endif
+                    </td>
 
 
-                            </td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $foods->id }}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $foods->foods_category_id }}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $foods->resturants_id }}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $foods->name }}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $foods->description }}</td>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <a href="{{ url("admin/foods/{$foods->id}/edit") }}"><button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="submit">
-                                Edite
-                              </button>
-                            </a>
-                        </td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <form action="{{ url("admin/foods/{$foods->id}")}}" method="post">
-                                @csrf
-                                @method('delete')
-                              <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded  text-black bg-red-600" type="submit">delete</button>
-                            </form>
-                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        </tr>
-                    @empty
-                    <td class="p-4 w-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
+                    <td class="px-6 py-4 text-center">
+                        @if ( $foods->foodsparty !== '0')
+                             {{$foods->foodsparty}}
+                        @else
+                            &#10060;
+                        @endif
+                    </td>
 
-                        </td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $allfoods->id }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ $allfoods->foods_category_id }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $allfoods->resturants_id }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $allfoods->name }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $allfoods->description }}</td>
+                    {{-- <td class="px-6 py-4 text-center"> --}}
+                    {{-- @if ($item['food_party_number'] !== null) --}}
+                            {{-- &#9989; --}}
+                    {{-- @else --}}
+                            {{-- &#10060; --}}
+                    {{-- @endif --}}
+                    {{-- </td> --}}
 
-                        <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                            <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    @endforelse
-                    </tbody>
-                </table>
+                    <td class="px-6 py-4">
+                    <a href="{{ url("/resturantowner/foods/{$foods->id}/edit") }}"  class="block w-20 text-center mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class=" focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                    </td>
+                    </form>
+
+                    </div>
+                </tr>
+                @endforeach
+                <!--- End Foreach---->
+
+            @endisset
+            @unless($data)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <form action="" method="post">
+                    <td class="px-6 py-4 text-center">
+                        not found please add food
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                       not found please add food
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        not found please add food
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        not found please add food
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        not found please add food
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        not found please add food
+                    </td>
+            @endunless
+
+                <!--- End Foreach---->
+        </tbody>
+    </table>
+</div>
+@if ($errors->any())
+<div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+            {{ $error}}
+        </div>
+        @endforeach
+</div>
+@endif
             </div>
         </div>
     </div>
-</div>
-
-
-
-
-
-
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 </x-app-layout>
+

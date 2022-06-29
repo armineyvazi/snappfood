@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->string('phone');
+            $table->string('resturantcategory');
+            $table->string('address');
+            $table->string('isopen')->default('1');
+            $table->string('accountnumber');
             $table->string('city');
             $table->string('loc:x')->default('0');
             $table->string('loc:y')->default('0');

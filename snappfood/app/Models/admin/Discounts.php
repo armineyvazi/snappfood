@@ -14,4 +14,6 @@ class Discounts extends Model
         'price',
 
     ];
+
+   
 }

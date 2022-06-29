@@ -21,11 +21,11 @@ class isadmin
 
 
 
-            if(!auth()->user()->isAdmin==1)
-            {
-               abort(403);
+            // if(!auth()->user()->isAdmin==1)
+            // {
+            //    abort(403);
 
-            }
+            // }
             // else if(auth()->user()->isAdmin==0 and auth()->user()->role==0){
 
 

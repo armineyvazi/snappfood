@@ -16,17 +16,17 @@ class resturantowner
      */
     public function handle(Request $request, Closure $next)
     {
-        dd('exit');
-        if(!auth()->user()->role==0 || auth()->user()->isAdmin==1)
-        {
-            dd('ab');
-            abort(403);
-        }
-        if(auth()->user()->checkprofile_resturant==0)
-        {
-            dd('a');
-            return redirect()->route('resturantcategory.create');
-        }
+        // dd('exit');
+        // if(!auth()->user()->role==0 || auth()->user()->isAdmin==1)
+        // {
+        //     dd('ab');
+        //     abort(403);
+        // }
+        // if(auth()->user()->checkprofile_resturant==0)
+        // {
+        //     dd('a');
+        //     return redirect()->route('resturantcategory.create');
+        // }
 
         return $next($request);
     }

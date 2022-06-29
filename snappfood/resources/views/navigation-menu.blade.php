@@ -10,7 +10,6 @@
                     </a>
                 </div>
 
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -18,24 +17,12 @@
                         {{ __('Dashboard') }}
                          <!----FoodsCategory---->
                     </x-jet-nav-link>
+
                     @if(auth()->user()->isAdmin)
                         <!-----Foods----->
                     <x-jet-nav-link href="{{ route('foodscategory.create') }}" :active="request()->routeIs('foodscategory.create')">
                         {{ __('Foodscategory') }}
                     </x-jet-nav-link>
-
-                    <!-----Foods----->
-                    {{-- <x-jet-nav-link href="{{ route('foods.create') }}" :active="request()->routeIs('foods.create')">
-                        {{ __('Foods') }}
-                    </x-jet-nav-link> --}}
-
-                        {{-- <!----Resturant--->
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Resturant') }}
-                    </x-jet-nav-link> --}}
-
-                    <!----Resturant--->
-                    <!--ResturantCategory-->
 
                     <x-jet-nav-link href="{{ route('resturantcategory.create') }}" :active="request()->routeIs('resturantcategory.create')">
                         {{ __('ResturantCategory') }}
@@ -44,8 +31,27 @@
                     <x-jet-nav-link href="{{ route('discounts.create') }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Discounts') }}
                     </x-jet-nav-link>
-                    
                     @endif
+
+                    @if(auth()->user()->role and auth()->user()->checkprofile_resturant)
+
+                    <x-jet-nav-link href="{{ route('foods.create') }}" :active="request()->routeIs('foods.create')">
+                        {{ __('AddFoods') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('resturantprofile.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
+                        {{ __('Edite profile') }}
+                    </x-jet-nav-link>
+
+                    @endif
+
+                    <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
+                    @if(auth()->user()->role and auth()->user()->checkprofile_resturant==0)
+                    <x-jet-nav-link href="{{ route('resturantprofile.create') }}" :active="request()->routeIs('resturantprofile.create')">
+                        {{ __('Please prees and confirm information To unlock abilities') }}
+                    </x-jet-nav-link>
+                    @endif
+                    <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
 
                 </div>
             </div>

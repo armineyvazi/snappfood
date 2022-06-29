@@ -6,6 +6,8 @@ use App\Http\Requests\StoreRestaurantownerRequest;
 use App\Http\Requests\UpdateRestaurantownerRequest;
 use App\Models\resturantowner\Restaurantowner;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\admin\ResturantCategory;
 
 class RestaurantownerController extends Controller
 {
@@ -16,7 +18,11 @@ class RestaurantownerController extends Controller
      */
     public function index()
     {
-        //
+        $data=ResturantCategory::all();
+        $findUserId=User::where('id',auth()->user()->id)->get();
+        $datauser=Restaurantowner::where('user_id',$findUserId[0]['id'])->get();
+
+        return view('resturant.profile.dashboardedite',compact('data','datauser'));
     }
 
     /**
@@ -26,7 +32,12 @@ class RestaurantownerController extends Controller
      */
     public function create()
     {
-        return view('resturant.profile.dashboardcreate');
+
+
+            $data=ResturantCategory::all();
+
+        return view('resturant.profile.dashboardprofile',compact('data'));
+
     }
 
     /**
@@ -37,50 +48,71 @@ class RestaurantownerController extends Controller
      */
     public function store(StoreRestaurantownerRequest $request)
     {
-        dd('ajab');
-        dd($request->all());
+
+       $request->validated();
+
+
+        $data_save=[
+            'name'=>$request->get('name'),
+            'user_id'=>auth()->user()->id,
+            'resturantcategory'=>$request->get('resturantcategory'),
+            'city'=>$request->get('city'),
+            'address'=>$request->get('address'),
+            'accountnumber'=>$request->get('accountnumber'),
+            'phone'=>$request->get('phone'),
+
+        ];
+        User::where('id',auth()->user()->id)->update(['checkprofile_resturant'=>1]);
+        Restaurantowner::create($data_save);
+
+        return redirect('/dashboard')->with('message','now you can use abilities resturant enjoy that');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Restaurantowner  $restaurantowner
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Restaurantowner  $restaurantowner
+    * @return \Illuminate\Http\Response
+    */
+
     public function show(Restaurantowner $restaurantowner)
     {
-        //
+
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Restaurantowner  $restaurantowner
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Models\Restaurantowner  $restaurantowner
+    * @return \Illuminate\Http\Response
+    */
     public function edit(Restaurantowner $restaurantowner)
     {
-        //
+
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRestaurantownerRequest  $request
-     * @param  \App\Models\Restaurantowner  $restaurantowner
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRestaurantownerRequest $request, Restaurantowner $restaurantowner)
+    * Update the specified resource in storage.
+    *
+    * @param  \App\Http\Requests\UpdateRestaurantownerRequest  $request
+    * @param  \App\Models\Restaurantowner  $restaurantowner
+    * @return \Illuminate\Http\Response
+    */
+    public function update(UpdateRestaurantownerRequest $request,$id)
     {
-        //
+        $findUserId=User::where('id',auth()->user()->id)->get();
+        Restaurantowner::where('user_id',$findUserId[0]['id'])
+            ->update($request->safe()->only('name','resturantcategory','city','address','phone','accountnumber','isopen'));
+            return redirect('resturantowner/resturantprofile')->with('message','Your inforamtion has been updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Restaurantowner  $restaurantowner
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Models\Restaurantowner  $restaurantowner
+    * @return \Illuminate\Http\Response
+    */
+
     public function destroy(Restaurantowner $restaurantowner)
     {
         //

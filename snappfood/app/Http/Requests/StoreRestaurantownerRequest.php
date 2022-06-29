@@ -24,6 +24,12 @@ class StoreRestaurantownerRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required',
+            'resturantcategory' => 'required',
+            'city' => 'required',
+            'address' => 'required|string',
+            'phone'=>'required|string',
+            'accountnumber' => 'required|string',
 
         ];
     }

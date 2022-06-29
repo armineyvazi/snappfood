@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\admin\DiscountsController;
 use App\Http\Controllers\admin\FoodsCategoryController;
+use App\Http\Controllers\resturantowner\ResturantownerFoods;
 use App\Http\Controllers\resturantowner\RestaurantownerController;
-// use App\Http\Controllers\admin\FoodsController;
 use App\Http\Controllers\admin\ResturantCategoryController;
 use App\Models\resturantowner\Restaurantowner;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Gate;
+
 
 
 /*
@@ -41,9 +41,7 @@ Route::middleware([
 Route::middleware(['isadmin'])->prefix('admin')->group(function (){
 
     Route::resource('foodscategory', FoodsCategoryController::class);//=>foodscategory/FoodsController
-
     Route::resource('resturantcategory', ResturantCategoryController::class);//=>resturantcategory/ResturantCategoryController
-
     Route::resource('discounts', DiscountsController::class);//=>discounts/DiscountsController
 
 });
@@ -51,10 +49,11 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function (){
 Route::middleware(['resturant'])->prefix('resturantowner')->group(function () {
 
     Route::resource('resturantprofile',RestaurantownerController::class);//=>profile/ProfileController
+    Route::resource('foods',ResturantownerFoods::class);//=>foods/FoodsController
 
 });
 
-//
 
-// Route::resource('/returantowner/setting',FoodsController::class);
+
+
 

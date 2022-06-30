@@ -22,5 +22,15 @@ class Restaurantowner extends Model
         'loc:x',
         'loc:y',
     ];
+    //blongto
+    //has one to week
+    public function resturant()
+    {
+        $this->belongsTo(App\Models\Users::class);
+    }
 
+    // public function week()
+    // {
+    //     $this->hasOne(App\Models::class);
+    // }
 }

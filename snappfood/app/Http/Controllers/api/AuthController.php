@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
-use App\Models\Customer;
+use App\Models\api\Customer;
+use App\Http\Controllers\Controller;
 use BaconQrCode\Renderer\Path\Curve;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -74,9 +75,27 @@ class AuthController extends Controller
         return response($response,201);
 
     }
+    public function update(Request $request,$id)
+    {
+        $fields = $request->validate([
+            'name'=>'required|string|unique:customers,email',
+            'email'=>'required|email',
+            'phone'=>'required',
+            'password'=>'required|string|confirmed',
+        ]);
+        $customer=[
+            'name'=>$fields['name'],
+            'email'=>$fields['email'],
+            'password'=>bcrypt($fields['password']),
+            'phone'=>$fields['phone'],
+        ];
 
+        Customer::where('email',$fields['email'])
+                     ->update($customer);
 
+     return response(['msg' => 'Customer update'],201);
 
+    }
 
 
 }

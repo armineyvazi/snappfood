@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('isopen')->default('1');
             $table->string('accountnumber');
             $table->string('city');
-            $table->string('loc:x')->default('0');
-            $table->string('loc:y')->default('0');
+            $table->string('score')->nullable();
+            $table->string('comments_count')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }

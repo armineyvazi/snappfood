@@ -4,11 +4,16 @@ namespace App\Models\resturantowner;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class Restaurantowner extends Model
+{
+    use HasApiTokens;
+    use HasFactory;
 
-{   use HasFactory;
-    protected $table = 'restaurantowners';
+   // protected $table = 'restaurantowners';
+   // protected $hidden='user_id';
+
     protected $fillable = [
         'id',
         'user_id',
@@ -16,11 +21,13 @@ class Restaurantowner extends Model
         'resturantcategory',
         'address',
         'isopen',
+        'score',
+        'comments_count',
         'accountnumber',
         'phone',
         'city',
-        'loc:x',
-        'loc:y',
+        'latitude',
+        'longitude',
     ];
     //blongto
     //has one to week

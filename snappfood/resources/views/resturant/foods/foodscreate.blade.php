@@ -21,7 +21,7 @@
                       <select class="block mt-1 w-full" required name="foodscategory">
                         <option>Select Your Foods Category</option>
                         @foreach($foods as $food)
-                        <option value="{{ $food->name}}">{{ $food->name }}</option>
+                        <option value="{{ $food->id}}">{{ $food->name }}</option>
                         @endforeach
                       </select>
                     </div>

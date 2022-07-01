@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\api\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\AddressController;
+use App\Http\Controllers\api\Restaurants;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,25 +20,25 @@ use Illuminate\Support\Facades\Route;
 //public Routes
 Route::post('/register',[AuthController::class,'register']);//route for register
 Route::post('/login',[AuthController::class,'login']);//route for login
-
-
-
-
-
-
-
+/**
+* ----------------------------------
+* |   Procted          Routes      |
+* ----------------------------------
+*/
 //Procted Routes routes
 Route::group(['middleware' => ['auth:sanctum']],function(){
 
-    Route::post('logout',[AuthController::class,'logout']);//route for logout.
-    
-
+    Route::post('logout',[AuthController::class,'logout']);//Route For Logout.
+    Route::post('addresses',[AddressController::class,'store']);//Route For  Addresses
+    Route::post('setcurrentaddresses',[AddressController::class,'setCurrentAddress']);//Route For Setcurrrent Addresses
+    Route::get('restaurants/{id}',[Restaurants::class,'getRestaurants']);//Route For Get restaurant information
+    Route::patch('customer/update/{id}',[AuthController::class,'update']);//Route For Update Customers
+    Route::get('restaurants',[Restaurants::class,'search']);
+    Route::get('restaurants/getcategory/{id}',[Restaurants::class,'getResturantFoods']);
 
 
 });
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
 
 

@@ -103,7 +103,7 @@ class RestaurantownerController extends Controller
         $findUserId=User::where('id',auth()->user()->id)->get();
         Restaurantowner::where('user_id',$findUserId[0]['id'])
             ->update($request->safe()->only('name','resturantcategory','city','address','phone','accountnumber','isopen'));
-            return redirect('resturantowner/resturantprofile')->with('message','Your inforamtion has been updated successfully.');
+        return redirect('resturantowner/resturantprofile')->with('message','Your inforamtion has been updated successfully.');
     }
 
     /**

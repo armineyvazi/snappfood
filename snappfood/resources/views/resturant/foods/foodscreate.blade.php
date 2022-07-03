@@ -1,8 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <p  class='text-red-700'>Please Confirm Information</p>
-        </h2>
+        <div class="flex gap-8">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    <a href="{{ url('/resturantowner/foods') }}" class='text-green-700'>Foods </a>
+            </h2>
+
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+                <a href="{{ route('foods.create') }}" class='text-green-700'> Create Food +</a>
+            </h2>
+            </div>
+            @if (session('message'))
+                <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                    {{ session('message') }}
+                </div>
+            @endif
+
     </x-slot>
     <a href="{{ url('/resturantowner/foods') }}" class="btn btn-primary text-green-500  flex justify-center hover"><p>Show foods</p></a>
     <div class="p-16 mb-32 ml-32 mr-32 mt-8">
@@ -60,7 +72,7 @@
                 </div>
 
 
-              
+
 
                 <div class="grid xl:grid-cols-2 xl:gap-6">
                     <div>

@@ -5,6 +5,11 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+
+
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        Gate::define('restautant_not_confirm_inforamtion',fn(User $user)=> $user->role and $user->checkprofile_resturant==0);
     }
 }

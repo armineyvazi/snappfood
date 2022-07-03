@@ -46,11 +46,11 @@
                     @endif
 
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
-                    @if(auth()->user()->role and auth()->user()->checkprofile_resturant==0)
+                    @can('restautant_not_confirm_inforamtion')
                     <x-jet-nav-link href="{{ route('resturantprofile.create') }}" :active="request()->routeIs('resturantprofile.create')">
                         {{ __('Please prees and confirm information To unlock abilities') }}
                     </x-jet-nav-link>
-                    @endif
+                    @endcan
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
 
                 </div>

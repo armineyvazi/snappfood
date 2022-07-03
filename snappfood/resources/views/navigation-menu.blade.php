@@ -18,7 +18,7 @@
                          <!----FoodsCategory---->
                     </x-jet-nav-link>
 
-                    @if(auth()->user()->isAdmin)
+                @can('is_admin')
                         <!-----Foods----->
                     <x-jet-nav-link href="{{ route('foodscategory.create') }}" :active="request()->routeIs('foodscategory.create')">
                         {{ __('Foodscategory') }}
@@ -31,10 +31,10 @@
                     <x-jet-nav-link href="{{ route('discounts.create') }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Discounts') }}
                     </x-jet-nav-link>
-                    @endif
+                @endcan
 
 
-                    @can('is_restaurant')
+                @can('is_restaurant')
                     <x-jet-nav-link href="{{ route('foods.create') }}" :active="request()->routeIs('foods.create')">
                         {{ __('AddFoods') }}
                     </x-jet-nav-link>
@@ -42,15 +42,15 @@
                     <x-jet-nav-link href="{{ route('resturantprofile.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Edite profile') }}
                     </x-jet-nav-link>
-                    @endcan
-                   
+                @endcan
+
 
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
-                    @can('restautant_not_confirm_inforamtion')
+                @can('restautant_not_confirm_inforamtion')
                     <x-jet-nav-link href="{{ route('resturantprofile.create') }}" :active="request()->routeIs('resturantprofile.create')">
                         {{ __('Please prees and confirm information To unlock abilities') }}
                     </x-jet-nav-link>
-                    @endcan
+                @endcan
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
 
                 </div>

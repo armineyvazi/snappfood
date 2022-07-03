@@ -32,5 +32,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Gate::define('restautant_not_confirm_inforamtion',fn(User $user)=> $user->role and $user->checkprofile_resturant==0);
         Gate::define('is_restaurant',fn(User $user)=> $user->role and $user->checkprofile_resturant);
+        Gate::define('is_admin',fn(User $user)=> $user->isAdmin);
     }
 }

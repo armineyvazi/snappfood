@@ -34,6 +34,7 @@
         </form>
     </div>
   </div>
+</div>
     @empty
 
     <div class="flex mb-4 items-center">

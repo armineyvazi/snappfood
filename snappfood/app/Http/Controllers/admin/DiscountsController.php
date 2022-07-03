@@ -30,7 +30,7 @@ class DiscountsController extends Controller
      */
     public function create()
     {
-      
+
 
         return view('admin.discounts.discount');
 
@@ -72,8 +72,6 @@ class DiscountsController extends Controller
      */
     public function edit($id)
     {
-
-
         $data=Discounts::where('id',$id)->get();
 
         return view('admin.discounts.discountupdate',compact('data'));

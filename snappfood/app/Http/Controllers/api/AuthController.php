@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Models\api\Customer;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterAuthRequest;
+use App\Http\Requests\LoginAuthRequest;
 use BaconQrCode\Renderer\Path\Curve;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,15 +13,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
-    public function register(Request $request)
+    public function register(RegisterAuthRequest $request)
     {
-        $fields = $request->validate([
-            'name'=>'required|string',
-            'email'=>'required|string|unique:customers,email',
-            'phone'=>'required',
-            'password'=>'required|string|confirmed',
-        ]);
+        $fields = $request->validated();
+
         $customer=Customer::create([
             'name'=>$fields['name'],
             'email'=>$fields['email'],
@@ -44,16 +41,13 @@ class AuthController extends Controller
         ];
     }
 
-    public function login(Request $request)
+    public function login(LoginAuthRequest $request,Customer $customers)
     {
 
-        $fields = $request->validate([
+        $fields = $request->validated();
 
-            'email'=>'required|string|email',
-            'password'=>'required|string',
-        ]);
         //Check Email
-        $customer=Customer::where('email',$fields['email'])->first();
+        $customer=$customers->where('email',$fields['email'])->first();
 
         //Check Password
         if(!$customer || !Hash::check($fields['password'],$customer->password))
@@ -65,37 +59,13 @@ class AuthController extends Controller
             ],401);
         }
 
-
         $token = $customer->createToken('StringAccsessTokenFor')->plainTextToken;
         $response=[
             'customer'=>$customer,
             'token'=>$token,
         ];
 
-        return response($response,201);
-
+        return response($response,200);
     }
-    public function update(Request $request,$id)
-    {
-        $fields = $request->validate([
-            'name'=>'required|string|unique:customers,email',
-            'email'=>'required|email',
-            'phone'=>'required',
-            'password'=>'required|string|confirmed',
-        ]);
-        $customer=[
-            'name'=>$fields['name'],
-            'email'=>$fields['email'],
-            'password'=>bcrypt($fields['password']),
-            'phone'=>$fields['phone'],
-        ];
-
-        Customer::where('email',$fields['email'])
-                     ->update($customer);
-
-     return response(['msg' => 'Customer update'],201);
-
-    }
-
 
 }

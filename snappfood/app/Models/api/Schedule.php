@@ -28,5 +28,8 @@ class Schedule extends Model
     );
     protected $hidden='restaurantowner_id';
 
-
+    public function resturant()
+    {
+        return $this->belongsTo(App\Models\resturantowner\Restaurantowner::class,'restaurantowner_id','id');
+    }
 }

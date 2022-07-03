@@ -60,11 +60,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-
-
-    public function user()
+    
+    public function resturant()
     {
-        $this->hasOne(App\Models\resturantowner\Resturantowner::class);
+        return $this->hasOne(App\Models\resturantowner\Resturantowner::class);
 
     }
 }

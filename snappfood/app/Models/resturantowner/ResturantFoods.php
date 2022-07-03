@@ -23,4 +23,10 @@ class ResturantFoods extends Model
         'discounts',//discounts of food
 
     ];
+    public function resturants()
+    {
+
+        return $this->hasOne(App\Models\resturantowner\Restaurantowner::class);
+
+    }
 }

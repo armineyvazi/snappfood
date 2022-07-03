@@ -4,26 +4,21 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreAddressRequest;
 use App\Models\api\Address;
 
 
 class AddressController extends Controller
 {
 
-    public function store(Request $request)
+    public function store(StoreAddressRequest $request,Address $address)
     {
-        $fields = $request->validate([
-            'tittle'=>'required',
-            'address'=>'required|string',
-            'latitude'=>'required',
-            'longitude'=>'required',
 
-        ]);
-        Address::where('customer_id',auth()->user()->id)->update(['iscurrent_address'=>false]);
+        $fields = $request->validated();
 
-        Address::create([
+        $address->where('customer_id',auth()->user()->id)->update(['iscurrent_address'=>false]);
+
+        $address->create([
             'tittle'=>$fields['tittle'],
             'customer_id'=>auth()->user()->id,
             'iscurrent_address'=>true,
@@ -33,20 +28,20 @@ class AddressController extends Controller
         ]);
 
 
-    return response(['msg'=>'address added successfully' ],201);
+     return response(['msg'=>'address added successfully' ],201);
 
     }
-    public function setCurrentAddress(Request $request)
+    public function update(Request $request,Address $address)
     {
-        $fields = $request->validate(['id'=>'required',]);
+        $fields = $request->validate(['id'=>'required']);
 
         $id=$fields['id'];
 
-        Address::where('customer_id',$id)->update(['iscurrent_address'=>false]);
+        $address->where('customer_id',$id)->update(['iscurrent_address'=>false]);
 
-        Address::where('id',$id)->update(['iscurrent_address'=>true]);
+        $address->where('id',$id)->update(['iscurrent_address'=>true]);
 
-        return response(["msg" =>"current address updated successfully"  ]);
+        return response(["msg" =>"current address updated successfully"]);
 
     }
 

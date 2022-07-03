@@ -5,6 +5,8 @@ use App\Http\Controllers\api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AddressController;
 use App\Http\Controllers\api\Restaurants;
+use App\Http\Controllers\api\CutomersConrtoller;
+
 
 
 /*
@@ -17,24 +19,34 @@ use App\Http\Controllers\api\Restaurants;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-//public Routes
+
+/**
+* ----------------------------------
+* |   Public|***********|Routes    |
+* ----------------------------------
+*/
 Route::post('/register',[AuthController::class,'register']);//route for register
 Route::post('/login',[AuthController::class,'login']);//route for login
 /**
 * ----------------------------------
-* |   Procted          Routes      |
+* |   Procted|**********|Routes    |
 * ----------------------------------
 */
-//Procted Routes routes
-Route::group(['middleware' => ['auth:sanctum']],function(){
+Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
+
 
     Route::post('logout',[AuthController::class,'logout']);//Route For Logout.
-    Route::post('addresses',[AddressController::class,'store']);//Route For  Addresses
-    Route::post('setcurrentaddresses',[AddressController::class,'setCurrentAddress']);//Route For Setcurrrent Addresses
-    Route::get('restaurants/{id}',[Restaurants::class,'getRestaurants']);//Route For Get restaurant information
-    Route::patch('customer/update/{id}',[AuthController::class,'update']);//Route For Update Customers
+
+    Route::post('/customers/id/addresses',[AddressController::class,'store']);//Route For  Add Addresses For Customers.
+    Route::post('/customers/id/addresses',[AddressController::class,'setCurrentAddress']);//Route For Setcurrrent Addresses
+
+    Route::get('restaurants/{id}',[Restaurants::class,'index']);//Route For Get restaurant information
+
+    Route::put('customers/{id}',[CutomersConrtoller::class,'update']);//Route For Update Customers
+
+
     Route::get('restaurants',[Restaurants::class,'search']);
-    Route::get('restaurants/getcategory/{id}',[Restaurants::class,'getResturantFoods']);
+    Route::get('restaurants/{restaurant_id}/foods',[Restaurants::class,'resturantsFood']);
 
 
 });

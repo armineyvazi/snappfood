@@ -31,9 +31,17 @@ class Restaurantowner extends Model
     ];
     //blongto
     //has one to week
-    public function resturant()
+    public function user()
     {
-        $this->belongsTo(App\Models\Users::class);
+       return $this->belongsTo(App\Models\Users::class);
+    }
+    public function shedules()
+    {
+       return $this->hasMany(App\Models\api\Schedule::class,'restaurantowner_id','id');
+    }
+    public function foods()
+    {
+        return $this->hasMany(App\Models\resturantowner\ResturantFoods::class,'restaurantowner_id');
     }
 
     // public function week()

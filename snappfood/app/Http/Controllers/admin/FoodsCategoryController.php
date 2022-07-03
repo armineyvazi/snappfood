@@ -16,10 +16,10 @@ class FoodsCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('is_admin');
         $foodsCategory=FoodsCategory::all();
 
-
-        return view('admin.foodscategory.foodscategoryindex',compact('foodsCategory'));
+    return view('admin.foodscategory.foodscategoryindex',compact('foodsCategory'));
     }
 
     /**
@@ -29,6 +29,7 @@ class FoodsCategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('is_admin');
           return view('admin.foodscategory.foodscategory');
     }
 
@@ -41,6 +42,7 @@ class FoodsCategoryController extends Controller
      */
     public function store(StoreFoodsCategoryRequest $request)
     {
+        $this->authorize('is_admin');
        $validated = $request->validated();
        FoodsCategory::create($request->safe()->only('name'));
 
@@ -66,6 +68,7 @@ class FoodsCategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('is_admin');
         $data=FoodsCategory::where('id',$id)->get();
 
         return view('admin.foodscategory.foodscategoryupdate',compact('data'));
@@ -79,6 +82,7 @@ class FoodsCategoryController extends Controller
      */
     public function update(UpdateFoodsCategoryRequest $request, $id)
     {
+        $this->authorize('is_admin');
         $validated = $request->validated();
         FoodsCategory::where('id',$id)->update($request->safe()->only('name'));
 
@@ -92,6 +96,7 @@ class FoodsCategoryController extends Controller
      */
     public function destroy($id)
     {
+       $this->authorize('is_admin');
        FoodsCategory::find($id)->delete();
        return redirect('/admin/foodscategory')->with('message','Foods Category deleted');
     }

@@ -19,8 +19,9 @@ class DiscountsController extends Controller
 
     public function index()
     {
-            $discounts=Discounts::all();
-        return view('admin.discounts.discountindex',compact('discounts'));
+        $this->authorize('is_admin');
+        $discounts=Discounts::all();
+    return view('admin.discounts.discountindex',compact('discounts'));
     }
 
     /**
@@ -30,11 +31,8 @@ class DiscountsController extends Controller
      */
     public function create()
     {
-
-
-        return view('admin.discounts.discount');
-
-
+        $this->authorize('create',Discounts::class);//only admin can create discount.
+    return view('admin.discounts.discount');
     }
 
     /**
@@ -46,11 +44,10 @@ class DiscountsController extends Controller
     public function store(StoreDiscountsRequest $request)
     {
 
+        $this->authorize('create',Discounts::class);//only admin can create discount.
         $validated = $request->validated();
-
         Discounts::create($request->safe()->only('name','price'));
-
-      return redirect('/admin/discounts')->with('message','Discounts  is save');
+    return redirect('/admin/discounts')->with('message','Discounts  is save');
     }
 
     /**
@@ -70,11 +67,13 @@ class DiscountsController extends Controller
      * @param  \App\Models\Discounts  $discounts
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Discounts $discounts,$id)
     {
-        $data=Discounts::where('id',$id)->get();
+        $this->authorize('update',$discounts);//only admin can create discount.
 
-        return view('admin.discounts.discountupdate',compact('data'));
+        $discounts=$discounts->where('id',$id)->get();
+
+    return view('admin.discounts.discountupdate',compact('discounts'));
     }
 
     /**
@@ -84,14 +83,15 @@ class DiscountsController extends Controller
      * @param  \App\Models\Discounts  $discounts
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDiscountsRequest $request, $id)
+    public function update(UpdateDiscountsRequest $request, Discounts $discounts,$id)
     {
 
-        $validated = $request->validated();
+        $this->authorize('update',$discounts);//only admin can create discount.
 
-        Discounts::where('id',$id)->update($request->safe()->only('name','price'));
+        $request->validated();
 
-     return redirect('/admin/discounts')->with('message','Discounts  is updated');
+        $discounts->where('id',$id)->update($request->only('name','price'));
+    return redirect('/admin/discounts')->with('message','Discounts  is updated');
     }
 
     /**
@@ -100,12 +100,11 @@ class DiscountsController extends Controller
      * @param  \App\Models\Discounts  $discounts
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Discounts $discounts,$id)
     {
-
-         Discounts::find($id)->delete();
-
-        return redirect('/admin/discounts')->with('message','Discount is deleted');
+        $this->authorize('delete',$discounts);
+      $discounts->where('id',$id)->delete();
+    return redirect('/admin/discounts')->with('message','Discount is deleted');
     }
 
 }

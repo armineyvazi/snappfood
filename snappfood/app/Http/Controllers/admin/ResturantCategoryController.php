@@ -16,8 +16,9 @@ class ResturantCategoryController extends Controller
      */
     public function index()
     {
-            $resturantCategory=ResturantCategory::all();
-        return view('admin.resturantscategory.resturantindex',compact('resturantCategory'));
+        $this->authorize('is_admin');
+        $resturantCategory=ResturantCategory::all();
+    return view('admin.resturantscategory.resturantindex',compact('resturantCategory'));
     }
 
     /**
@@ -27,7 +28,8 @@ class ResturantCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.resturantscategory.resturantcategory');
+        $this->authorize('is_admin');
+    return view('admin.resturantscategory.resturantcategory');
     }
 
     /**
@@ -38,10 +40,11 @@ class ResturantCategoryController extends Controller
      */
     public function store(StoreResturantCategoryRequest $request)
     {
+        $this->authorize('is_admin');
         $validated = $request->validated();
         ResturantCategory::create($request->safe()->only('name'));
 
-      return redirect('/admin/resturantcategory')->with('message','ResturantCategory category is save');
+    return redirect('/admin/resturantcategory')->with('message','ResturantCategory category is save');
     }
 
     /**
@@ -63,9 +66,9 @@ class ResturantCategoryController extends Controller
      */
     public function edit($id)
     {
-         $data=ResturantCategory::where('id',$id)->get();
-
-        return view('admin.resturantscategory.resturantupdate',compact('data'));
+        $this->authorize('is_admin');
+        $data=ResturantCategory::where('id',$id)->get();
+    return view('admin.resturantscategory.resturantupdate',compact('data'));
     }
 
     /**
@@ -77,10 +80,10 @@ class ResturantCategoryController extends Controller
      */
     public function update(UpdateResturantCategoryRequest $request, $id)
     {
-            $validated = $request->validated();
-            ResturantCategory::where('id',$id)->update($request->safe()->only('name'));
-
-        return redirect('/admin/resturantcategory')->with('message','ResturantCategory  is updated');
+        $this->authorize('is_admin');
+        $validated = $request->validated();
+        ResturantCategory::where('id',$id)->update($request->safe()->only('name'));
+    return redirect('/admin/resturantcategory')->with('message','ResturantCategory  is updated');
     }
 
     /**
@@ -91,7 +94,8 @@ class ResturantCategoryController extends Controller
      */
     public function destroy($id)
     {
-            ResturantCategory::find($id)->delete();
-        return redirect('/admin/resturantcategory')->with('message','resturantcategory is deleted');
+        $this->authorize('is_admin');
+        ResturantCategory::find($id)->delete();
+    return redirect('/admin/resturantcategory')->with('message','resturantcategory is deleted');
     }
 }

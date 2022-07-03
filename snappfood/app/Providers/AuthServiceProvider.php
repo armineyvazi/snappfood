@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\admin\Discounts;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
-
-
-
+use App\Policies\DiscountsPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,13 +19,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Discounts::class => DiscountsPolicy::class,
     ];
 
     /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
+    * Register any authentication / authorization services.
+    *
+    * @return void
+    */
     public function boot()
     {
         $this->registerPolicies();

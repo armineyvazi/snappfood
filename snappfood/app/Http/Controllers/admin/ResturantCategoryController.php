@@ -28,7 +28,7 @@ class ResturantCategoryController extends Controller
      */
     public function create()
     {
-        $this->authorize('is_admin');
+        $this->authorize('create',ResturantsCategory::class);
     return view('admin.resturantscategory.resturantcategory');
     }
 
@@ -40,7 +40,7 @@ class ResturantCategoryController extends Controller
      */
     public function store(StoreResturantCategoryRequest $request)
     {
-        $this->authorize('is_admin');
+        $this->authorize('create',ResturantsCategory::class);
         $validated = $request->validated();
         ResturantCategory::create($request->safe()->only('name'));
 

@@ -33,8 +33,8 @@
                     </x-jet-nav-link>
                     @endif
 
-                    @if(auth()->user()->role and auth()->user()->checkprofile_resturant)
 
+                    @can('is_restaurant')
                     <x-jet-nav-link href="{{ route('foods.create') }}" :active="request()->routeIs('foods.create')">
                         {{ __('AddFoods') }}
                     </x-jet-nav-link>
@@ -42,8 +42,8 @@
                     <x-jet-nav-link href="{{ route('resturantprofile.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Edite profile') }}
                     </x-jet-nav-link>
-
-                    @endif
+                    @endcan
+                   
 
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
                     @can('restautant_not_confirm_inforamtion')

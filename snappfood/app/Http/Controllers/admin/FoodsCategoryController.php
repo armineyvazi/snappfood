@@ -29,7 +29,7 @@ class FoodsCategoryController extends Controller
      */
     public function create()
     {
-        $this->authorize('is_admin');
+        $this->authorize('create',FoodsCategory::class);
           return view('admin.foodscategory.foodscategory');
     }
 
@@ -42,7 +42,7 @@ class FoodsCategoryController extends Controller
      */
     public function store(StoreFoodsCategoryRequest $request)
     {
-        $this->authorize('is_admin');
+        $this->authorize('create',FoodsCategory::class);
        $validated = $request->validated();
        FoodsCategory::create($request->safe()->only('name'));
 

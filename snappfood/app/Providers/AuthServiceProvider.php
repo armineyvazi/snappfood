@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Models\admin\Discounts;
+use App\Models\admin\FoodsCategory;
+use App\Models\admin\ResturantCategory;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Policies\DiscountsPolicy;
+use App\Policies\FoodsCategoryPolicy;
+use App\Policies\RestaurantCategoryPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Team::class => TeamPolicy::class,
         Discounts::class => DiscountsPolicy::class,
+        FoodsCategory::class=>FoodsCategoryPolicy::class,
+        ResturantCategory::class=>RestaurantCategoryPolicy::class,
+
     ];
 
     /**

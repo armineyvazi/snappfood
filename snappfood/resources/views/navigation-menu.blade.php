@@ -39,7 +39,7 @@
                         {{ __('AddFoods') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('resturantprofile.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
+                    <x-jet-nav-link href="{{ route('restaurantowner.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Edite profile') }}
                     </x-jet-nav-link>
                 @endcan

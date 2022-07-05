@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class='container m-16'>
-            <form action='{{ route('resturantprofile.store') }}' method='POST'>
+            <form action='{{ route('restaurantowner.store') }}' method='POST'>
                 @csrf
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder="" required="">

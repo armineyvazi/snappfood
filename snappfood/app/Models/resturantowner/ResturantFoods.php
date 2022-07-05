@@ -4,6 +4,7 @@ namespace App\Models\resturantowner;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\resturantowner\ResturantOwner;
 
 class ResturantFoods extends Model
 {
@@ -26,7 +27,7 @@ class ResturantFoods extends Model
     public function resturants()
     {
 
-        return $this->hasOne(App\Models\resturantowner\Restaurantowner::class);
+        return $this->hasOne(Restaurantowner::class);
 
     }
 }

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex gap-8">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    <a href="{{ url('/resturantowner/foods') }}" class='text-green-700'>Foods </a>
+                    <a href="{{ url('restaurantowners/foods') }}" class='text-green-700'>Foods </a>
             </h2>
 
             <h2 class="font-semibold text-xl text-gray-800 leading-tight ">

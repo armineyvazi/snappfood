@@ -15,7 +15,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class='container m-16'>
 
-            <form action='{{ route('resturantprofile.update',auth()->user()->id) }}' method='POST'>
+            <form action='{{ route('restaurantowner.update',auth()->user()->id) }}' method='POST'>
                 @csrf
                 @method('PUT')
                 <div class="relative z-0 w-full mb-6 group">

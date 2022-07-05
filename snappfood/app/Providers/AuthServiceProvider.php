@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\admin\Discounts;
 use App\Models\admin\FoodsCategory;
 use App\Models\admin\ResturantCategory;
+use App\Models\resturantowner\Restaurantowner;
+use App\Models\resturantowner\ResturantFoods;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,6 +15,8 @@ use App\Models\User;
 use App\Policies\DiscountsPolicy;
 use App\Policies\FoodsCategoryPolicy;
 use App\Policies\RestaurantCategoryPolicy;
+use App\Policies\RestaurantownerPolicy;
+use App\Policies\ResturantFoodPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,6 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         Discounts::class => DiscountsPolicy::class,
         FoodsCategory::class=>FoodsCategoryPolicy::class,
         ResturantCategory::class=>RestaurantCategoryPolicy::class,
+        Restaurantowner::class=>RestaurantownerPolicy::class,
+        ResturantFoods::class=>ResturantFoodPolicy::class,
 
     ];
 

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex gap-8">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <a href="{{ url('/resturantowner/foods') }}" class='text-green-700'>Foods </a>
+                <a href="{{ url('restaurantowners/foods') }}" class='text-green-700'>Foods </a>
         </h2>
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
@@ -61,7 +61,7 @@
                 @foreach ($data as $foods)
 
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <form action="{{ url("/resturantowner/foods/{$foods->id}") }}" method="post">
+                    <form action="{{ url("/restaurantowners/foods/{$foods->id}") }}" method="post">
                     <td class="px-6 py-4 text-center">
                     <img class="w-25 h-25 " src="{{ asset('/images/'.$foods->image) }}" alt="no image">
                     </td>
@@ -108,7 +108,7 @@
                     {{-- </td> --}}
 
                     <td class="px-6 py-4">
-                    <a href="{{ url("/resturantowner/foods/{$foods->id}/edit") }}"  class="block w-20 text-center mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Edit</a>
+                    <a href="{{ url("/restaurantowners/foods/{$foods->id}/edit") }}"  class="block w-20 text-center mt-5 focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Edit</a>
                         @csrf
                         @method('DELETE')
                     <button type="submit" class=" focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>

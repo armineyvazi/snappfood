@@ -5,14 +5,15 @@ namespace App\Models\resturantowner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\User;
 
 class Restaurantowner extends Model
 {
     use HasApiTokens;
     use HasFactory;
 
-   // protected $table = 'restaurantowners';
-   // protected $hidden='user_id';
+    // protected $table = 'restaurantowners';
+    // protected $hidden='user_id';
 
     protected $fillable = [
         'id',
@@ -33,7 +34,7 @@ class Restaurantowner extends Model
     //has one to week
     public function user()
     {
-       return $this->belongsTo(App\Models\Users::class);
+       return $this->belongsTo(User::class);
     }
     public function shedules()
     {
@@ -44,8 +45,4 @@ class Restaurantowner extends Model
         return $this->hasMany(App\Models\resturantowner\ResturantFoods::class,'restaurantowner_id');
     }
 
-    // public function week()
-    // {
-    //     $this->hasOne(App\Models::class);
-    // }
 }

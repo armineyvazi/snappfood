@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
+use App\Models\resturantowner\Restaurantowner;
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -60,10 +61,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-    
+
     public function resturant()
     {
-        return $this->hasOne(App\Models\resturantowner\Resturantowner::class);
+        return $this->hasOne(Restaurantowner::class);
 
     }
 }

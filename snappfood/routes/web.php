@@ -46,9 +46,9 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function (){
 
 });
 
-Route::middleware(['resturant'])->prefix('resturantowner')->group(function () {
+Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () {
 
-    Route::resource('resturantprofile',RestaurantownerController::class);//=>profile/ProfileController
+    Route::resource('restaurantowner',RestaurantownerController::class);//=>profile/ProfileController
     Route::resource('foods',ResturantownerFoods::class);//=>foods/FoodsController
 
 });

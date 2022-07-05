@@ -12,10 +12,10 @@ use App\Models\admin\ResturantCategory;
 class RestaurantownerController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $data=ResturantCategory::all();
@@ -26,31 +26,29 @@ class RestaurantownerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
 
 
-            $data=ResturantCategory::all();
-
+        $data=ResturantCategory::all();
         return view('resturant.profile.dashboardprofile',compact('data'));
 
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRestaurantownerRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRestaurantownerRequest $request)
+    * Store a newly created resource in storage.
+    *
+    * @param  \App\Http\Requests\StoreRestaurantownerRequest  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function store(StoreRestaurantownerRequest $request ,Restaurantowner $restaurantowner)
     {
-
+       $this->authorize('view',$restaurantowner);
        $request->validated();
-
 
         $data_save=[
             'name'=>$request->get('name'),
@@ -63,7 +61,7 @@ class RestaurantownerController extends Controller
 
         ];
         User::where('id',auth()->user()->id)->update(['checkprofile_resturant'=>1]);
-        Restaurantowner::create($data_save);
+        $restaurantowner->create($data_save);
 
         return redirect('/dashboard')->with('message','now you can use abilities resturant enjoy that');
     }
@@ -98,12 +96,11 @@ class RestaurantownerController extends Controller
     * @param  \App\Models\Restaurantowner  $restaurantowner
     * @return \Illuminate\Http\Response
     */
-    public function update(UpdateRestaurantownerRequest $request,$id)
+    public function update(UpdateRestaurantownerRequest $request,Restaurantowner $restaurantowner)
     {
-        $findUserId=User::where('id',auth()->user()->id)->get();
-        Restaurantowner::where('user_id',$findUserId[0]['id'])
-            ->update($request->safe()->only('name','resturantcategory','city','address','phone','accountnumber','isopen'));
-        return redirect('resturantowner/resturantprofile')->with('message','Your inforamtion has been updated successfully.');
+        $this->authorize('update',$restaurantowner);
+        $restaurantowner->update($request->safe()->only('name','resturantcategory','city','address','phone','accountnumber','isopen'));
+        return redirect()->route('restaurantowner.index')->with('message','Your inforamtion has been updated successfully.');
     }
 
     /**

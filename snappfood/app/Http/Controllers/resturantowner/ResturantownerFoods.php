@@ -7,19 +7,19 @@ use App\Models\admin\FoodsCategory;
 use App\Models\resturantowner\ResturantFoods;
 use App\Http\Requests\StoreResturantownerFoods;
 use App\Http\Requests\UpdateResturantownerFoods;
-use App\Models\admin\ResturantCategory;
 use App\Models\resturantowner\Restaurantowner;
-use Illuminate\Http\Request;
+
 
 class ResturantownerFoods extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
+        $this->authorize('is_restaurant');
         $id=Restaurantowner::where('user_id',auth()->user()->id)->get();
         $data=ResturantFoods::where('restaurantowner_id',$id[0]['id'])->get();
 
@@ -33,23 +33,21 @@ class ResturantownerFoods extends Controller
     */
     public function create()
     {
-
+        $this->authorize('create',ResturantFoods::class);
         $foods=FoodsCategory::all();
         $discounts=Discounts::all();
-
         return  view('resturant.foods.foodscreate',compact('foods', 'discounts'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(StoreResturantownerFoods $request)
     {
-
-
+       $this->authorize('create',ResturantFoods::class);
        $validate=$request->validated();
        $id=Restaurantowner::where('user_id',auth()->user()->id)->get();
        $newImage=time().'-'.$request->name.'-'.$validate['image']->extension();
@@ -65,8 +63,7 @@ class ResturantownerFoods extends Controller
             'image'=>$newImage,
         ];
         ResturantFoods::create($data);
-
-        return redirect('/resturantowner/foods')->with('message','Foods add Resturant');
+        return redirect('restaurantowners/foods')->with('message','Foods add Resturant');
 
     }
 
@@ -89,15 +86,15 @@ class ResturantownerFoods extends Controller
     */
 
 
-    public function edit($id)
+    public function edit(ResturantFoods $food)
     {
+        $this->authorize('update',$food);
         $foods=FoodsCategory::all();
         $discounts=Discounts::all();
-        $data=ResturantFoods::find($id)->get();
+        $data=ResturantFoods::where('id',$food->id)->get();
 
         return  view('resturant.foods.foodsupdate',compact('data','discounts','foods'));
     }
-
     /**
     * Update the specified resource in storage.
     *
@@ -105,8 +102,12 @@ class ResturantownerFoods extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(UpdateResturantownerFoods $request, $id)
+    public function update(UpdateResturantownerFoods $request,ResturantFoods $food)
     {
+
+      //  dd($food);
+       // dd(Restaurantowner::find($food->restaurantowner_id)->user()->first()->id==auth()->user()->id);
+         $this->authorize('update',$food);
 
         $validate=$request->validated();
         if (isset($validate['image'])) {
@@ -126,9 +127,9 @@ class ResturantownerFoods extends Controller
             'image'=>$newImage,
 
         ];
-        ResturantFoods::find($id)->update($data);
+        $food->update($data);
 
-        return redirect('/resturantowner/foods')->with('message','Foods Update in Resturant');
+        return redirect('restaurantowners/foods')->with('message','Foods Update in Resturant');
 
     }
     /**
@@ -137,9 +138,10 @@ class ResturantownerFoods extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy($id)
+    public function destroy(ResturantFoods $food)
     {
-            ResturantFoods::find($id)->delete();
-        return  redirect('/resturantowner/foods')->with('message','Foods Delet  in Resturant');
+        $this->authorize('delete',$food);
+        $food->delete();
+        return  redirect()->route('foods.index')->with('message','Foods Delet  in Resturant');
     }
 }

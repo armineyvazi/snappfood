@@ -47,7 +47,7 @@
 
                     <!----- If USER ROLE TO 1 IT'S Meaning to is a Resturantowner ----->
                 @can('restautant_not_confirm_inforamtion')
-                    <x-jet-nav-link href="{{ route('resturantprofile.create') }}" :active="request()->routeIs('resturantprofile.create')">
+                    <x-jet-nav-link href="{{ route('restaurantowner.create') }}" :active="request()->routeIs('restaurantowner.create')">
                         {{ __('Please prees and confirm information To unlock abilities') }}
                     </x-jet-nav-link>
                 @endcan

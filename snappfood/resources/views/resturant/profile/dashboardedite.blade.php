@@ -60,7 +60,7 @@
 
 
                 <div class="relative z-0 w-full mb-6 group">
-                        <input type="text" name="accountnumber" value='{{$datauser[0]['accountnumber'] }}' id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder="" required="">
+                        <input type="text" name="accountnumber" value='{{$datauser[0]['accountnumber'] }}' id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder="000-000-000-000-000-000" required="">
                         <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">account number</label>
                      </div>
                 </div>
@@ -69,9 +69,13 @@
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="tel"  name="phone" id="floating_phone" value='{{$datauser[0]['phone'] }}' class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder="" required="">
                         <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
-                    </div>
+                     </div>
                 </div>
 
+                <a href='{{ route('shedules.create') }}' class='flex justify-between'><p class="text-green-800">Press to WorkTime Restaurant</p></a>
+                <br>
+                <a href='{{ route('shedules.edit',auth()->user()->id)}}' class='flex justify-between'><p class="text-green-800">Update Work Time Restaurant</p></a>
+                <br>
                 <button type="submit" class="text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
             </form>
 

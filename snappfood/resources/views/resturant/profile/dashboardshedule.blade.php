@@ -9,6 +9,13 @@
         {{ session('message') }}
     </div>
     @endif
+    @if($errors->any())
+    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-green-200 dark:text-black-800" role="alert">
+        @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+         @endforeach
+    </div>
+    @endif
 
 
     <div class="p-16 mb-32 ml-32 mr-32 mt-8">

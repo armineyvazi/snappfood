@@ -24,21 +24,21 @@ class UpdateCallenderRequest extends FormRequest
     public function rules()
     {
 
-            return [
-                "sat-s" => "string",
-                "sat-e" => "string",
-                "sun-s" => "string",
-                "sun-e" => "string",
-                "mon-s" => "string",
-                "mon-e" => "string",
-                "tue-s" => "string",
-                "tue-e" => "string",
-                "wed-s" => "string",
-                "wed-e" => "string",
-                "thu-s" => "string",
-                "thu-e" => "string",
-                "fri-s" => "string",
-                "fri-e" => "string",
-            ];
+        return [
+            "sat-s" => "date_format:H:i",
+            "sat-e" => "date_format:H:i|after:sat-s",
+            "sun-s" => "date_format:H:i",
+            "sun-e" => "date_format:H:i|after:sun-s",
+            "mon-s" => "date_format:H:i",
+            "mon-e" => "date_format:H:i|after:mon-s",
+            "tue-s" => "date_format:H:i",
+            "tue-e" => "date_format:H:i|after:tue-s",
+            "wed-s" => "date_format:H:i",
+            "wed-e" => "date_format:H:i|after:wed-s",
+            "thu-s" => "date_format:H:i",
+            "thu-e" => "date_format:H:i|after:thu-s",
+            "fri-s" => "date_format:H:i",
+            "fri-e" => "date_format:H:i|after:fri-s",
+        ];
     }
 }

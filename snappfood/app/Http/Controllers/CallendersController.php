@@ -98,8 +98,6 @@ class CallendersController extends Controller
     {
         $fields=$request->validated();
 
-
-
         $data=array(
             'saturday'=>json_encode([$fields['sat-s'],$fields['sat-e']]),
             'sunday'=>json_encode([$fields['sun-s'],$fields['sun-e']]),
@@ -112,6 +110,9 @@ class CallendersController extends Controller
 
        );
         Schedule::where('id',$id)->update($data);
+
+        return redirect('dashboard')->with('message', 'Your restaurant has been updated successfully');
+
     }
 
     /**

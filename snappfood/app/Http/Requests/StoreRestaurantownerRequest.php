@@ -30,6 +30,8 @@ class StoreRestaurantownerRequest extends FormRequest
             'address' => 'required|string',
             'phone'=>'required|string',
             'accountnumber' => 'required|string',
+            'lat'=>'string',
+            'lang'=>'string'
 
         ];
     }

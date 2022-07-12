@@ -7,6 +7,8 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
+        <link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+        <script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="img/fiv.png" type="image/x-icon">
 

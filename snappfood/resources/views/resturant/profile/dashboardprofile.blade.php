@@ -1,3 +1,6 @@
+
+<link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+<script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -54,11 +57,21 @@
                         <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
                     </div>
                 </div>
-
+                <input type=hidden id="lat" name="lat">
+                <input type=hidden id="lng" name="lng">
                 <button type="submit" class="text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
-            </form>
 
+                <div class="flex justify-center">
+                <div id="map" style="width: 450px; height: 450px; background: #eee; border: 2px solid #aaa;"></div>
+                </div>
+
+                 </form>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src='{{ asset('js/location.js') }}'>
+
+
+                </script>
 </x-app-layout>

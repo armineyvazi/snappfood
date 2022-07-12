@@ -47,6 +47,7 @@ class RestaurantownerController extends Controller
     */
     public function store(StoreRestaurantownerRequest $request ,Restaurantowner $restaurantowner)
     {
+       // dd($request->all());
        $this->authorize('view',$restaurantowner);
        $request->validated();
 
@@ -58,6 +59,8 @@ class RestaurantownerController extends Controller
             'address'=>$request->get('address'),
             'accountnumber'=>$request->get('accountnumber'),
             'phone'=>$request->get('phone'),
+            'latitude'=>$request->get('lat'),
+            'longitude'=>$request->get('lng'),
 
         ];
         User::where('id',auth()->user()->id)->update(['checkprofile_resturant'=>1]);

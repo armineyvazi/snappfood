@@ -8,6 +8,7 @@ use App\Models\api\Carts;
 use App\Models\resturantowner\ResturantFoods;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCartRequest;
+use App\Http\Requests\UpdateCartRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CartsController extends Controller
@@ -91,9 +92,17 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCartRequest $request,$id)
     {
-        //
+        $fields=$request->validated();
+        $data=[
+            'resturant_foods_id'=>$fields['foods_id'],
+            'count'=>$fields['count'],
+        ];
+        Carts::where('user_id',1)->update($data);
+
+       return response(['msg'=>'Your cart has been updated successfully'],200);
+
     }
 
     /**

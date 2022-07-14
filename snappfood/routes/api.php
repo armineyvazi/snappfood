@@ -34,7 +34,7 @@ Route::post('/login',[AuthController::class,'login']);//route for login
 * |   Procted|**********|Routes    |
 * ----------------------------------
 */
-
+Route::post('carts/cart_id/pay',[CartsController::class,'pay']);
 Route::resource('carts',CartsController::class);
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){

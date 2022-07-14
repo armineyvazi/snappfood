@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CartsControllerResource;
 use App\Http\Resources\ShowCartResource;
 use App\Models\api\Carts;
+use App\Http\Requests\PayCartRequest;
+use Illuminate\Http\Request;
 use App\Models\resturantowner\ResturantFoods;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
@@ -126,8 +128,8 @@ class CartsController extends Controller
      *@param ind $cart_id
      *@return \Illuminate\Http\Response
      */
-    public function pay($cart_id)
+    public function pay(PayCartRequest $request)
     {
-
+         return $request->validated();
     }
 }

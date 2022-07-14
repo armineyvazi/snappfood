@@ -4,12 +4,12 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CartsControllerResource;
+use App\Http\Resources\ShowCartResource;
 use App\Models\api\Carts;
 use App\Models\resturantowner\ResturantFoods;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class CartsController extends Controller
 {
@@ -69,9 +69,14 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id): \Illuminate\Http\Response
     {
-        //
+        $data=Carts::find($id);
+
+        if(is_null($data))
+          return response(['msg'=>'food not found']);
+
+        return ShowCartResource::make($data);
     }
 
     /**
@@ -114,5 +119,15 @@ class CartsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /**
+     * pay for cart
+     *
+     *@param ind $cart_id
+     *@return \Illuminate\Http\Response
+     */
+    public function pay($cart_id)
+    {
+
     }
 }

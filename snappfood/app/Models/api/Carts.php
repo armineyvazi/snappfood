@@ -9,7 +9,13 @@ use App\Models\resturantowner\ResturantFoods;
 class Carts extends Model
 {
     use HasFactory;
-
+    protected $fillable=[
+        'id',
+        'restaurantowner_id',
+        'user_id',
+        'resturant_foods_id',
+        'count',
+    ];
 
     public function restaurantowner()
     {

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\User;
+use App\Models\api\Carts;
 
 class Restaurantowner extends Model
 {
@@ -44,5 +45,9 @@ class Restaurantowner extends Model
     {
         return $this->hasMany(App\Models\resturantowner\ResturantFoods::class,'restaurantowner_id');
     }
+    // public function carts()
+    // {
+    //     return $this->hasMany(Carts::class,'restaurantowner_id');
+    // }
 
 }

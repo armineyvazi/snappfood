@@ -5,7 +5,7 @@ namespace App\Models\resturantowner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\resturantowner\ResturantOwner;
-
+use App\Models\api\Carts;
 class ResturantFoods extends Model
 {
     use HasFactory;
@@ -26,8 +26,10 @@ class ResturantFoods extends Model
     ];
     public function resturants()
     {
-
         return $this->hasOne(Restaurantowner::class);
-
+    }
+    public function foodscart()
+    {
+        return $this->hasMany(Carts::class);
     }
 }

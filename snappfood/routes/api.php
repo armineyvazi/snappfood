@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AddressController;
+use App\Http\Controllers\api\Carts;
+use App\Http\Controllers\api\CartsController;
 use App\Http\Controllers\api\Restaurants;
 use App\Http\Controllers\api\CutomersConrtoller;
 
@@ -32,6 +34,9 @@ Route::post('/login',[AuthController::class,'login']);//route for login
 * |   Procted|**********|Routes    |
 * ----------------------------------
 */
+
+Route::resource('carts',CartsController::class);
+
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
 
 

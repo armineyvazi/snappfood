@@ -6,6 +6,7 @@ use App\Http\Controllers\resturantowner\ResturantownerFoods;
 use App\Http\Controllers\resturantowner\RestaurantownerController;
 use App\Http\Controllers\admin\ResturantCategoryController;
 use App\Http\Controllers\CallendersController;
+use App\Http\Controllers\resturantowner\OrdersController;
 use App\Models\resturantowner\Restaurantowner;
 use Illuminate\Support\Facades\Route;
 
@@ -52,5 +53,7 @@ Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () 
     Route::resource('restaurantowner',RestaurantownerController::class);//=>profile/ProfileController
     Route::resource('foods',ResturantownerFoods::class);//=>foods/FoodsController
     Route::resource('shedules',CallendersController::class);//=>
+    Route::get('orders',[OrdersController::class,'create']);
+    Route::post('orders',[OrdersController::class,'update']);
 
 });

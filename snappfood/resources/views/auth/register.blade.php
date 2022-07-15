@@ -21,6 +21,11 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="phone" value="{{ __('phone') }}" />
+                <x-jet-input id="phone" class="block mt-1 w-full" type="phonenumber" name="phone" :value="old('phone')" required />
+            </div>
+
+            <div class="mt-4">
                 <div class="flex justify-center">
                     <div class="mb-3 xl:w-96">
                       <select class="block mt-1 w-full" required name="select">

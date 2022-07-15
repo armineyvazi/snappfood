@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(ResturantFoods::class);
             $table->foreignIdFor(User::class);
             $table->string('count');
-        
+            $table->timestamps();
         });
     }
 

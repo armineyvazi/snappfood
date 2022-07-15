@@ -34,8 +34,7 @@ Route::post('/login',[AuthController::class,'login']);//route for login
 * |   Procted|**********|Routes    |
 * ----------------------------------
 */
-Route::post('carts/cart_id/pay',[CartsController::class,'pay']);
-Route::resource('carts',CartsController::class);
+
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
 
@@ -44,6 +43,8 @@ Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
 
     Route::post('/customers/id/addresses',[AddressController::class,'store']);//Route For  Add Addresses For Customers.
     Route::post('/customers/id/addresses',[AddressController::class,'setCurrentAddress']);//Route For Setcurrrent Addresses
+    Route::post('carts/cart_id/pay',[CartsController::class,'pay']);
+    Route::resource('carts',CartsController::class);
 
     Route::get('restaurants/{id}',[Restaurants::class,'index']);//Route For Get restaurant information
 

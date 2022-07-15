@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
+            $table->string('phone');
             $table->boolean('isAdmin')->default('0');
             $table->boolean('role')->default('0');//1=>restourant owner and 0 is mean user;
             $table->boolean('checkprofile_resturant')->default('0');

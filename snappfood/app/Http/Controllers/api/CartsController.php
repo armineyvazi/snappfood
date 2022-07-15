@@ -7,11 +7,12 @@ use App\Http\Resources\CartsControllerResource;
 use App\Http\Resources\ShowCartResource;
 use App\Models\api\Carts;
 use App\Http\Requests\PayCartRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\resturantowner\ResturantFoods;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
-
+use App\Models\Orders;
 
 class CartsController extends Controller
 {
@@ -22,7 +23,7 @@ class CartsController extends Controller
      */
     public function index()
     {
-        $carts=Carts::where('user_id',1)->with('restaurantowner')->get();
+        $carts=Carts::where('user_id',auth()->user()->id)->with('restaurantowner')->get();
 
         return CartsControllerResource::collection($carts);
     }
@@ -50,7 +51,7 @@ class CartsController extends Controller
         $data=[
             'restaurantowner_id'=>ResturantFoods::where('restaurantowner_id',$fields['foods_id'])->first()->id,
             'resturant_foods_id'=>$fields['foods_id'],
-            'user_id'=>1,
+            'user_id'=>auth()->user()->id,
             'count'=>$fields['count'],
 
         ];
@@ -106,7 +107,7 @@ class CartsController extends Controller
             'resturant_foods_id'=>$fields['foods_id'],
             'count'=>$fields['count'],
         ];
-        Carts::where('user_id',1)->update($data);
+        Carts::where('user_id',auth()->user()->id)->update($data);
 
        return response(['msg'=>'Your cart has been updated successfully'],200);
 
@@ -130,6 +131,31 @@ class CartsController extends Controller
      */
     public function pay(PayCartRequest $request)
     {
-         return $request->validated();
+        $filed=$request->validated();
+        $data=Carts::find($filed['cart_id']);
+        $foods=ResturantFoods::find($data['resturant_foods_id']);
+        $user=User::where('id',$data['user_id'])->get()->first();
+        if (Orders::where('carts_id', $filed['cart_id'])->get()->first()==null) {
+            $order=[
+            'carts_id'=>$data['id'],
+            'restaurantowner_id'=> $data['restaurantowner_id'],
+            'resturant_foods_id'=>$data['resturant_foods_id'],
+            'foods_name'=>$foods->name,
+            'price'=>$foods->price,
+            'sum'=>$foods->price*$data['count'],
+            'user_id'=>$data['user_id'],
+            'count'=>$data['count'],
+            'name'=>$user->name,
+            'email'=>$user->email,
+            'phone'=>$user->phone,
+            'orders_status'=>'Pending',
+
+        ];
+            Orders::create($order);
+            return response(['msg'=>'your order has been created successfully']);
+        }
+        else
+            return response(['msg'=>'Your order is save']);
+
     }
 }

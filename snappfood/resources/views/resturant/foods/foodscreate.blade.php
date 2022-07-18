@@ -16,7 +16,7 @@
             @endif
 
     </x-slot>
-    <a href="{{ url('/resturantowner/foods') }}" class="btn btn-primary text-green-500  flex justify-center hover"><p>Show foods</p></a>
+    <a href="{{ url('restaurantowners/foods') }}" class="btn btn-primary text-green-500  flex justify-center hover"><p>Show foods</p></a>
     <div class="p-16 mb-32 ml-32 mr-32 mt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

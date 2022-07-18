@@ -25,7 +25,12 @@ class CartsController extends Controller
     {
         $carts=Carts::where('user_id',auth()->user()->id)->with('restaurantowner')->get();
 
-        return CartsControllerResource::collection($carts);
+        if(!($carts->isEmpty()))
+
+         return CartsControllerResource::collection($carts);
+
+        return response(['msg'=>'NOT FOUND']);
+
     }
 
     /**

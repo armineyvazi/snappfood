@@ -16,20 +16,16 @@ class CartsControllerResource extends JsonResource
     public function toArray($request)
     {
         return [
-
-                    'id'=>$this->id,
-                    'restaurtant'=>
+                 'id'=>$this->id,
+                 'restaurtant'=>
                     [
                         'title'=>$this->restaurantowner->name,
                         'image'=>'https://picsum.photos/200/300',
                     ],
-                    'foods'=>FoodsCartResources::collection(ResturantFoods::where('restaurantowner_id',$this->restaurantowner_id)->with('foodscart')->get()),
-
+                    'foods'=>FoodsCartResources::collection(ResturantFoods::where('id',$this->resturant_foods_id)->with('foodscart')->get()),
 
                     'created_at'=>$this->created_at,
                     'updated_at'=>$this->updated_at,
-
-
 
                 ];
     }

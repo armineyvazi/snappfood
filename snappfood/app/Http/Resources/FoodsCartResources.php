@@ -15,7 +15,6 @@ class FoodsCartResources extends JsonResource
      */
     public function toArray($request)
     {
-        //dd(Carts::where('resturant_foods_id',$this->id)->get()->count);
         return [
             'id'=>$this->id,
             'title'=>$this->name,

@@ -136,8 +136,10 @@ class CartsController extends Controller
      */
     public function pay(PayCartRequest $request)
     {
+
         $filed=$request->validated();
         $data=Carts::find($filed['cart_id']);
+
         $foods=ResturantFoods::find($data['resturant_foods_id']);
         $user=User::where('id',$data['user_id'])->get()->first();
         if (Orders::where('carts_id', $filed['cart_id'])->get()->first()==null) {

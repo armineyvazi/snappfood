@@ -85,7 +85,7 @@ class CallendersController extends Controller
      */
     public function edit($id)
     {
-        $data=Schedule::where('restaurantowner_id',Restaurantowner::find(auth()->user()->id)->id)->get()->first();
+        $data=Schedule::where('restaurantowner_id',User::find(auth()->user()->id)->resturant->user_id)->get()->first();
 
         return view('resturant.profile.dashboardsheduleupdate',compact('data'));
     }
@@ -109,7 +109,7 @@ class CallendersController extends Controller
             'wednesday'=>json_encode([$fields['wed-s'],$fields['wed-e']]),
             'thursday'=>json_encode([$fields['thu-s'],$fields['thu-e']]),
             'friday'=>json_encode([$fields['fri-s'],$fields['fri-e']]),
-            'restaurantowner_id'=>Restaurantowner::find(auth()->user()->id)->id,
+            'restaurantowner_id'=>User::find(auth()->user()->id)->resturant->user_id,
 
        );
         Schedule::where('id',$id)->update($data);

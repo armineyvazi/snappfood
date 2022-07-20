@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterAuthRequest;
 use App\Http\Requests\LoginAuthRequest;
 use BaconQrCode\Renderer\Path\Curve;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,9 +18,11 @@ class AuthController extends Controller
     {
         $fields = $request->validated();
 
-        $customer=Customer::create([
+        $customer=User::create([
             'name'=>$fields['name'],
             'email'=>$fields['email'],
+            'isAdmin'=>0,
+            'role'=>0,
             'password'=>bcrypt($fields['password']),
             'phone'=>$fields['phone'],
         ]);
@@ -41,16 +44,16 @@ class AuthController extends Controller
         ];
     }
 
-    public function login(LoginAuthRequest $request,Customer $customers)
+    public function login(LoginAuthRequest $request,User $user)
     {
 
         $fields = $request->validated();
 
         //Check Email
-        $customer=$customers->where('email',$fields['email'])->first();
+        $user=$user->where('email',$fields['email'])->first();
 
         //Check Password
-        if(!$customer || !Hash::check($fields['password'],$customer->password))
+        if(!$user || !Hash::check($fields['password'],$user->password))
         {
             return response([
                 'message'
@@ -59,9 +62,9 @@ class AuthController extends Controller
             ],401);
         }
 
-        $token = $customer->createToken('StringAccsessTokenFor')->plainTextToken;
+        $token = $user->createToken('StringAccsessTokenFor')->plainTextToken;
         $response=[
-            'customer'=>$customer,
+            'user'=>$user,
             'token'=>$token,
         ];
 

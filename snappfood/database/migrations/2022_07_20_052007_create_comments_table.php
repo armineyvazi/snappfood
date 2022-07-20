@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\resturantowner\Restaurantowner;
 use App\Models\resturantowner\ResturantFoods;
 use App\Models\api\Carts;
+use App\Models\User;
 
 
 return new class extends Migration
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Restaurantowner::class);
             $table->foreignIdFor(ResturantFoods::class);
+            $table->foreignIdFor(User::class);
             $table->foreignIdFor(Carts::class);
             $table->boolean('report')->default(false);
             $table->string('answer')->nullable();

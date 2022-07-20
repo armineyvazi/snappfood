@@ -24,7 +24,7 @@ class PayCartRequest extends FormRequest
     public function rules()
     {
         return [
-            'cart_id'=>'integer',
+            'cart_id'=>'required|integer',
         ];
     }
 }

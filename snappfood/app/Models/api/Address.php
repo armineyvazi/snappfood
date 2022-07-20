@@ -14,7 +14,7 @@ class Address extends Model
         'latitude',
         'iscurrent_address',
         'longitude',
-        'customer_id',
+        'user_id',
 
     ];
 

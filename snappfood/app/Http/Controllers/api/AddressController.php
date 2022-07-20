@@ -37,7 +37,7 @@ class AddressController extends Controller
 
         $id=$fields['id'];
 
-        $address->where('user_id',$id)->update(['iscurrent_address'=>false]);
+        $address->where('user_id',auth()->user()->id)->update(['iscurrent_address'=>false]);
 
         $address->where('id',$id)->update(['iscurrent_address'=>true]);
 

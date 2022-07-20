@@ -42,8 +42,8 @@ Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
     Route::post('logout',[AuthController::class,'logout']);//Route For Logout.
 
     Route::post('/customers/id/addresses',[AddressController::class,'store']);//Route For  Add Addresses For Customers.
-    Route::post('/customers/id/addresses',[AddressController::class,'setCurrentAddress']);//Route For Setcurrrent Addresses
-    
+    Route::post('/customers/id/add_address',[AddressController::class,'update']);//Route For Setcurrrent Addresses
+
     Route::post('carts/cart_id/pay',[CartsController::class,'pay']);
     Route::resource('carts',CartsController::class);
 

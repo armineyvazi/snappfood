@@ -16,11 +16,11 @@ class AddressController extends Controller
 
         $fields = $request->validated();
 
-        $address->where('customer_id',auth()->user()->id)->update(['iscurrent_address'=>false]);
+        $address->where('user_id',auth()->user()->id)->update(['iscurrent_address'=>false]);
 
         $address->create([
             'tittle'=>$fields['tittle'],
-            'customer_id'=>auth()->user()->id,
+            'user_id'=>auth()->user()->id,
             'iscurrent_address'=>true,
             'address'=>$fields['address'],
             'latitude'=>$fields['latitude'],
@@ -37,7 +37,7 @@ class AddressController extends Controller
 
         $id=$fields['id'];
 
-        $address->where('customer_id',$id)->update(['iscurrent_address'=>false]);
+        $address->where('user_id',$id)->update(['iscurrent_address'=>false]);
 
         $address->where('id',$id)->update(['iscurrent_address'=>true]);
 

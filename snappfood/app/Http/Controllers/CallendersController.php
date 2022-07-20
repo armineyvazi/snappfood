@@ -7,6 +7,7 @@ use App\Models\api\Schedule;
 use App\Models\resturantowner\Restaurantowner;
 use App\Http\Requests\UpdateCallenderRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CallendersController extends Controller
 {
@@ -40,9 +41,11 @@ class CallendersController extends Controller
     {
        $fields=$request->validated();
 
-       $data_check_exist=Schedule::where('restaurantowner_id',Restaurantowner::find(auth()->user()->id)->id)->get()->first();
 
-       if(!is_null($data_check_exist))
+       $data_check_exist=Schedule::where('restaurantowner_id',User::find(auth()->user()->id)->resturant->user_id)->get()->first();
+
+
+       if(!empty($data_check_exist))
        {
         return redirect('dashboard')->with('error', 'Please Update Your Time Resturant');
        }
@@ -54,7 +57,7 @@ class CallendersController extends Controller
             'wednesday'=>json_encode([$fields['wed-s'],$fields['wed-e']]),
             'thursday'=>json_encode([$fields['thu-s'],$fields['thu-e']]),
             'friday'=>json_encode([$fields['fri-s'],$fields['fri-e']]),
-            'restaurantowner_id'=>Restaurantowner::find(auth()->user()->id)->id,
+            'restaurantowner_id'=>User::find(auth()->user()->id)->resturant->user_id,
 
        );
        Schedule::create($data);

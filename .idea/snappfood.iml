@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/snappfood/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/snappfood/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/snappfood/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/snappfood/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/dasprid/enum" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/fruitcake/php-cors" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/jaybizzle/crawler-detect" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/error-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-php72" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpspec/prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/complexity" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/cli-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/code-unit" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/resource-operations" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/nette/schema" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/league/flysystem" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/nette/utils" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/league/commonmark" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/league/config" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/maximebf/debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/fortify" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/sail" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/sanctum" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/jetstream" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/laravel/serializable-closure" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/graham-campbell/result-type" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/livewire/livewire" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/php-invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/filp/whoops" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/jenssegers/agent" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/brick/math" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/psy/psysh" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/barryvdh/laravel-debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/pragmarx/google2fa" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/spatie/backtrace" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/spatie/laravel-ignition" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/voku/portable-ascii" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/spatie/flare-client-php" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/spatie/ignition" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/snappfood/vendor/facade/ignition-contracts" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -101,6 +101,7 @@ class RestaurantownerController extends Controller
     */
     public function update(UpdateRestaurantownerRequest $request,Restaurantowner $restaurantowner)
     {
+    
         $this->authorize('update',$restaurantowner);
         $restaurantowner->update($request->safe()->only('name','resturantcategory','city','address','phone','accountnumber','isopen'));
         return redirect()->route('restaurantowner.index')->with('message','Your inforamtion has been updated successfully.');

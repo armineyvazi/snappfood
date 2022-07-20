@@ -10,12 +10,13 @@
         </div>
     @endif
 
+
     <div class="p-16 mb-32 ml-32 mr-32 mt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         <div class='container m-16'>
 
-            <form action='{{ route('restaurantowner.update',auth()->user()->id) }}' method='POST'>
+            <form action='{{ route('restaurantowner.update',$datauser[0]) }}' method='POST'>
                 @csrf
                 @method('PUT')
                 <div class="relative z-0 w-full mb-6 group">

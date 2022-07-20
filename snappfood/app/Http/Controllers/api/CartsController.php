@@ -51,10 +51,11 @@ class CartsController extends Controller
      */
     public function store(StoreCartRequest $request,Carts $cart)
     {
+
         $fields=$request->validated();
 
         $data=[
-            'restaurantowner_id'=>ResturantFoods::where('restaurantowner_id',$fields['foods_id'])->first()->id,
+            'restaurantowner_id'=>ResturantFoods::where('id',$fields['foods_id'])->first()->restaurantowner_id,
             'resturant_foods_id'=>$fields['foods_id'],
             'user_id'=>auth()->user()->id,
             'count'=>$fields['count'],
@@ -104,6 +105,7 @@ class CartsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * http://localhost:8000/api/v1/carts/id
      */
     public function update(UpdateCartRequest $request,$id)
     {
@@ -133,11 +135,13 @@ class CartsController extends Controller
      *
      *@param ind $cart_id
      *@return \Illuminate\Http\Response
+     *http://localhost:8000/api/v1/carts/cart_id/pay
      */
     public function pay(PayCartRequest $request)
     {
 
         $filed=$request->validated();
+
         $data=Carts::find($filed['cart_id']);
 
         $foods=ResturantFoods::find($data['resturant_foods_id']);

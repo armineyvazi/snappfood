@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\api\Customer;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->boolean('iscurrent_address');
-            $table->foreignIdFor(Customer::class);
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }

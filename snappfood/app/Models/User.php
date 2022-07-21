@@ -10,7 +10,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use App\Models\resturantowner\Restaurantowner;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
+
 
 
 class User extends Authenticatable
@@ -62,9 +64,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function resturant()
+    public function resturant():HasOne
     {
         return $this->hasOne(Restaurantowner::class);
 
     }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }

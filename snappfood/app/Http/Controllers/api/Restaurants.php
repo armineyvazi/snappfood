@@ -37,6 +37,8 @@ class Restaurants extends Controller
         if (!is_null($request->score)) {
             $query->where('score', '>=', $request->score);
         }
+
+        // use laravel local scopes
         $data = $query->get();
 
         return response($data, 200);

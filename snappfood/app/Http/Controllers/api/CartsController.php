@@ -82,10 +82,12 @@ class CartsController extends Controller
     {
         $data=Carts::find($id);
 
-        if(is_null($data))
-          return response(['msg'=>'food not found']);
+        // if(is_null($data))
+        //   return response(['msg'=>'food not found']);
 
-        return ShowCartResource::make($data);
+        // return ShowCartResource::make($data);
+
+        return $data ? ShowCartResource::make($data) : response(['msg'=>'food not found']);
     }
 
     /**

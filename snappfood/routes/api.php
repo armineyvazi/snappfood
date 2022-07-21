@@ -51,7 +51,7 @@ Route::middleware(['auth:sanctum'])->prefix('v1')->group(function(){
     Route::put('customers/{id}',[CutomersConrtoller::class,'update']);//Route For Update Customers
 
     Route::post('comments',[CommentController::class,'store']);//Route For store Comments
-
+    Route::get('comments',[CommentController::class,'index']);//Route For Get Comments 
 
     Route::get('restaurants',[Restaurants::class,'search']);
     Route::get('restaurants/{restaurant_id}/foods',[Restaurants::class,'resturantsFood']);

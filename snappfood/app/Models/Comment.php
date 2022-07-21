@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\resturantowner\ResturantFoods;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +21,12 @@ class Comment extends Model
         'message',
         'score',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+    public function foods()
+    {
+        return $this->belongsTo(ResturantFoods::class,'resturant_foods_id','id');
+    }
 }

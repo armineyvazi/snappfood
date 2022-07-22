@@ -197,6 +197,7 @@ class CartsController extends Controller
         'orders_status'=>'Pending',
         ]);
         Orders::create($data);
+        Carts::where('user_id', auth()->user()->id)->update(['ispay'=>true]);
       return response(['msg'=>'your order has been created successfully']);
     }
     else

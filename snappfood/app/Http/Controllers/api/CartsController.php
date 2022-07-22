@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CartsControllerResource;
-use App\Http\Resources\ShowCartResource;
-use App\Models\api\Carts;
-use App\Http\Requests\PayCartRequest;
 use App\Models\User;
+use App\Models\Orders;
+use App\Models\CartItem;
+use App\Models\api\Carts;
 use Illuminate\Http\Request;
-use App\Models\resturantowner\ResturantFoods;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PayCartRequest;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
-use App\Models\Orders;
+use App\Http\Resources\ShowCartResource;
+use App\Models\resturantowner\ResturantFoods;
+use App\Http\Resources\CartsControllerResource;
+use Faker\Provider\Image;
+use Illuminate\Contracts\Validation\ImplicitRule;
+
+use function PHPUnit\Framework\isNull;
 
 class CartsController extends Controller
 {
@@ -23,14 +28,9 @@ class CartsController extends Controller
      */
     public function index()
     {
-        $carts=Carts::where('user_id',auth()->user()->id)->with('restaurantowner')->get();
+        $carts=Carts::where('user_id', auth()->user()->id)->with('restaurantowner')->get();
 
-        if(!($carts->isEmpty()))
-
-         return CartsControllerResource::collection($carts);
-
-        return response(['msg'=>'NOT FOUND']);
-
+        return $carts ? CartsControllerResource::collection($carts) :response(['msg'=>'NOT FOUND']);
     }
 
     /**
@@ -49,27 +49,44 @@ class CartsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCartRequest $request,Carts $cart)
+    public function store(StoreCartRequest $request, Carts $cart)
     {
-
         $fields=$request->validated();
 
-        $data=[
-            'restaurantowner_id'=>ResturantFoods::where('id',$fields['foods_id'])->first()->restaurantowner_id,
-            'resturant_foods_id'=>$fields['foods_id'],
+        $foods=ResturantFoods::where('id', $fields['foods_id'])->first();
+
+        $cart_id=Carts::where('restaurantowner_id', $foods->restaurantowner_id)->first() ??false;
+
+        $checkIsSetFood=CartItem::where('resturant_foods_id', $fields['foods_id'])->first() ??false;
+
+        if (isset($cart_id->restaurantowner_id)!= $foods->restaurantowner_id) {
+            $cart_data=[
+            'restaurantowner_id'=>$foods->restaurantowner_id,
             'user_id'=>auth()->user()->id,
+            'ispay'=>false,
+            ];
+            $cart_id=Carts::create($cart_data)->id;
+        }
+        if ($checkIsSetFood==false) {
+            $data=[
+            'user_id'=>auth()->user()->id,
+            'carts_id'=>$cart_id->id ?? $cart_id,
+            'resturant_foods_id'=>$fields['foods_id'],
             'count'=>$fields['count'],
+            'foods_name'=>$foods->name,
+            'price_cart_items'=>$foods->price*$fields['count'],
+            ];
 
-        ];
-
-        $id=$cart->create($data)->id;
-
+            CartItem::create($data);
+        } else {
+            return response(['msg'=>'Food exist']);
+        }
         $message=[
             'msg'=>"food added to cart successfully",
-            'cart_id'=>$id
+            'cart_id'=>$cart_id->id ?? $cart_id,
         ];
 
-        return response($message,201);
+        return response($message, 201);
     }
 
     /**
@@ -78,14 +95,9 @@ class CartsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id): \Illuminate\Http\Response
+    public function show($id)
     {
         $data=Carts::find($id);
-
-        // if(is_null($data))
-        //   return response(['msg'=>'food not found']);
-
-        // return ShowCartResource::make($data);
 
         return $data ? ShowCartResource::make($data) : response(['msg'=>'food not found']);
     }
@@ -95,6 +107,7 @@ class CartsController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     *
      */
     public function edit($id)
     {
@@ -109,25 +122,33 @@ class CartsController extends Controller
      * @return \Illuminate\Http\Response
      * http://localhost:8000/api/v1/carts/id
      */
-    public function update(UpdateCartRequest $request,$id)
+    public function update(UpdateCartRequest $request, $id)
     {
         $fields=$request->validated();
+
+        $exist=ResturantFoods::find($fields['foods_id'])?->get();
+
+        $exist_cart_item=CartItem::where('resturant_foods_id', $fields['foods_id'])?->get();
+
         $data=[
             'resturant_foods_id'=>$fields['foods_id'],
             'count'=>$fields['count'],
         ];
-        Carts::where('user_id',auth()->user()->id)->update($data);
 
-       return response(['msg'=>'Your cart has been updated successfully'],200);
+        if ($exist==null || $exist_cart_item==null) {
+            return response(['This food does not exist']);
+        }
 
+        CartItem::where('resturant_foods_id', $fields['foods_id'])->update($data);
+
+        return response(['msg'=>'Your cart has been updated successfully'], 200);
     }
-
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy($id)
     {
         //
@@ -141,34 +162,44 @@ class CartsController extends Controller
      */
     public function pay(PayCartRequest $request)
     {
+    $field=$request->validated();
 
-        $filed=$request->validated();
+    $cart=Carts::where('user_id', auth()->user()->id)->where('ispay', false)->where('id', $field['cart_id'])->first();
 
-        $data=Carts::find($filed['cart_id']);
+    $user=User::where('id', auth()->user()->id)->first();
 
-        $foods=ResturantFoods::find($data['resturant_foods_id']);
-        $user=User::where('id',$data['user_id'])->get()->first();
-        if (Orders::where('carts_id', $filed['cart_id'])->get()->first()==null) {
-            $order=[
-            'carts_id'=>$data['id'],
-            'restaurantowner_id'=> $data['restaurantowner_id'],
-            'resturant_foods_id'=>$data['resturant_foods_id'],
-            'foods_name'=>$foods->name,
-            'price'=>$foods->price,
-            'sum'=>$foods->price*$data['count'],
-            'user_id'=>$data['user_id'],
-            'count'=>$data['count'],
-            'name'=>$user->name,
-            'email'=>$user->email,
-            'phone'=>$user->phone,
-            'orders_status'=>'Pending',
+    $order=Orders::where('user_id', auth()->user()->id)?->first();
 
-        ];
-            Orders::create($order);
-            return response(['msg'=>'your order has been created successfully']);
-        }
-        else
-            return response(['msg'=>'Your order is save']);
+    $cartItem=CartItem::where('carts_id', $field['cart_id'])->get();
 
+    $foodsPrice=0;
+
+    foreach ($cartItem as $key =>$value) {
+        $foodsName[]=$value['foods_name'];
+        $foodsPrice+=(int)$value['price_cart_items'];
+        $foodsCount[]=$value['count'];
+    }
+    $foodsName=implode(',', $foodsName);
+    $foodsCount=implode(',', $foodsCount);
+
+    if (is_null($order))
+    {   $data=array_merge([
+        'carts_id'=>$cart->id,
+        'restaurantowner_id'=> $cart->restaurantowner_id,
+        'resturant_foods_id'=>$cartItem[0]->resturant_foods_id,
+        'foods_name'=>$foodsName,
+        'total'=>$foodsPrice,
+        'user_id'=>auth()->user()->id,
+        'count'=>$foodsCount,
+        'name'=>$user->name,
+        'email'=>$user->email,
+        'phone'=>$user->phone,
+        'orders_status'=>'Pending',
+        ]);
+        Orders::create($data);
+      return response(['msg'=>'your order has been created successfully']);
+    }
+    else
+        return response(['msg'=>'Your order is save']);
     }
 }

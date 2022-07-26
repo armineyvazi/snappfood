@@ -18,8 +18,8 @@ class FoodsCartResources extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->name,
-            'count'=>$this->foodscart[0]->count,
-            'price'=>$this->price*1,
+            'price'=>$this->price*$this->count,
+            'count'=>$this->count,
         ];
     }
 }

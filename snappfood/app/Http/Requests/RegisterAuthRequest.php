@@ -25,7 +25,7 @@ class RegisterAuthRequest extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'email'=>'required|string|unique:customers,email',
+            'email'=>'required|string|unique:users,email',
             'phone'=>'required',
             'password'=>'required|string|confirmed',
         ];

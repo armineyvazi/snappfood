@@ -2,6 +2,7 @@
 
 namespace App\Models\api;
 
+use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\resturantowner\Restaurantowner;
@@ -13,8 +14,7 @@ class Carts extends Model
         'id',
         'restaurantowner_id',
         'user_id',
-        'resturant_foods_id',
-        'count',
+        'ispay',
     ];
 
     public function restaurantowner()

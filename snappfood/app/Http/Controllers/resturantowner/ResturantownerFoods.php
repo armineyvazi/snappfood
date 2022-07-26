@@ -64,7 +64,6 @@ class ResturantownerFoods extends Controller
         ];
         ResturantFoods::create($data);
         return redirect('restaurantowners/foods')->with('message','Foods add Resturant');
-
     }
 
     /**
@@ -104,10 +103,7 @@ class ResturantownerFoods extends Controller
     */
     public function update(UpdateResturantownerFoods $request,ResturantFoods $food)
     {
-
-      //  dd($food);
-       // dd(Restaurantowner::find($food->restaurantowner_id)->user()->first()->id==auth()->user()->id);
-         $this->authorize('update',$food);
+        $this->authorize('update',$food);
 
         $validate=$request->validated();
         if (isset($validate['image'])) {

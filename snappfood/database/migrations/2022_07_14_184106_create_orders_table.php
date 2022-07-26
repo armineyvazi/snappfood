@@ -24,13 +24,16 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->string('foods_name');
-            $table->string('price');
-            $table->string('sum');
+            $table->string('total');
             $table->string('count');
             $table->string('phone');
             $table->string('email');
             $table->foreignIdFor(ResturantFoods::class);
             $table->string('orders_status');
+            $table->string('comments')->nullable();
+            $table->string('score')->nullable();
+            $table->boolean('report')->default(false);
+            $table->string('answer')->nullable();
             $table->timestamps();
         });
 

@@ -15,9 +15,8 @@ class FoodsCommentResource extends JsonResource
     public function toArray($request)
     {
         // dd($this);
-        // return [
-        //     $this->foods->name,
-
-        // ];
+        return [
+            $this->foods_name,
+        ];
     }
 }

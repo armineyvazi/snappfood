@@ -83,7 +83,7 @@
                     </td>
 
                     <td class="px-6 py-4 text-center">
-                    @if ( $foods->discounts !== 'Admin offer for discount')
+                    @if ( $foods->discounts !== '0')
                          {{$foods->discounts}}
                     @else
                         &#10060;

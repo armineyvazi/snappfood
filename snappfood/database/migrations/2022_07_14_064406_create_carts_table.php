@@ -19,9 +19,8 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Restaurantowner::class);
-            $table->foreignIdFor(ResturantFoods::class);
             $table->foreignIdFor(User::class);
-            $table->string('count');
+            $table->boolean('ispay')->default(false);
             $table->timestamps();
         });
     }

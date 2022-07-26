@@ -37,7 +37,7 @@
                         <div class="grid xl:grid-cols-2 xl:gap-6">
                             <div class="mb-6 xl:w-96">
                               <select class="block mt-1 w-full" required name="discounts">
-                                <option>Admin offer for discount</option>
+                                <option value="0">Admin offer for discount</option>
                                 @foreach($discounts as $discount)
                                 <option value="{{ $discount->price }}">&nbsp;|&nbsp;price:&nbsp;{{ $discount->price }}</option>
                                 @endforeach

@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\CartItem;
+use App\Http\Resources\FoodsCartResources;
 use App\Models\resturantowner\ResturantFoods;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CartsControllerResource extends JsonResource
 {
@@ -15,6 +17,7 @@ class CartsControllerResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
                  'id'=>$this->id,
                  'restaurtant'=>
@@ -22,11 +25,9 @@ class CartsControllerResource extends JsonResource
                         'title'=>$this->restaurantowner->name,
                         'image'=>'https://picsum.photos/200/300',
                     ],
-                    'foods'=>FoodsCartResources::collection(ResturantFoods::where('id',$this->resturant_foods_id)->with('foodscart')->get()),
-
+                    'foods'=>FoodsCartResources::collection(CartItem::where('user_id',auth()->user()->id)->get()),
                     'created_at'=>$this->created_at,
                     'updated_at'=>$this->updated_at,
-
                 ];
     }
 }

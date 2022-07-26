@@ -1,14 +1,11 @@
 <?php
 
-
+use App\Models\api\Carts;
+use App\Models\resturantowner\ResturantFoods;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\resturantowner\Restaurantowner;
-use App\Models\resturantowner\ResturantFoods;
-use App\Models\api\Carts;
 use App\Models\User;
-
 
 return new class extends Migration
 {
@@ -19,15 +16,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Restaurantowner::class);
-            $table->foreignIdFor(User::class);
             $table->foreignIdFor(Carts::class);
-            $table->boolean('report')->default(false);
-            $table->string('answer')->nullable();
-            $table->string('message');
-            $table->string('score')->nullable();
+            $table->foreignIdFor(User::class);
+            $table->string('foods_name');
+            $table->foreignIdFor(ResturantFoods::class);
+            $table->string('count');
+            $table->string('price_cart_items');
             $table->timestamps();
         });
     }
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('cart_items');
     }
 };

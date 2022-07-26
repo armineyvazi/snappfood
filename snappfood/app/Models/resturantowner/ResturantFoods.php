@@ -26,7 +26,7 @@ class ResturantFoods extends Model
     ];
     public function resturants()
     {
-        return $this->hasOne(Restaurantowner::class);
+        return $this->hasOne(Restaurantowner::class,'id','restaurantowner_id');
     }
     public function foodscart()
     {

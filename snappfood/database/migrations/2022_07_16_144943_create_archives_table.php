@@ -26,8 +26,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('name');
             $table->string('foods_name');
-            $table->string('price');
-            $table->string('sum');
+            $table->string('total');
             $table->string('count');
             $table->string('phone');
             $table->string('email');

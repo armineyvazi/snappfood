@@ -17,7 +17,7 @@ class OrdersServies
     public function updateOrders($switch,$email,$id,$orders_status)
     {
         $cart=Orders::find($id)->first();
-        
+
         switch ($switch) {
             case 'pending':
                 dispatch(new PendingJob($email))->delay(now()->addSeconds(33));
@@ -31,6 +31,7 @@ class OrdersServies
                 break;
 
             case 'delivered':
+
                 $data=[
                     'carts_id'=>$cart->carts_id,
                     'orders_id'=>$cart->id,
@@ -38,8 +39,7 @@ class OrdersServies
                     'restaurantowner_id'=>$cart->restaurantowner_id,
                     'user_id'=>$cart->user_id,
                     'foods_name'=>$cart->foods_name,
-                    'price'=>$cart->price,
-                    'sum'=>$cart->sum,
+                    'total'=>$cart->total,
                     'count'=>$cart->count,
                     'phone'=>$cart->phone,
                     'email'=>$cart->email,

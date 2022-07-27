@@ -16,6 +16,8 @@ class Comment extends Model
         'carts_id',
         'user_id',
         'report',
+        'name',
+        'foodName',
         'answer',
         'message',
         'score',

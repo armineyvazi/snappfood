@@ -46,6 +46,14 @@
                     <x-jet-nav-link href="{{ route('restaurantowner.index',auth()->user()->id) }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Edite profile') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ url('restaurantowners/archives' )}}" :active="request()->routeIs('ArchiveController@index')">
+                        {{ __('Archive') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ url('restaurantowners/customerreviews' )}}" :active="request()->routeIs('CustomerReviewsController@index')">
+                        {{ __('Customer Reviews') }}
+                    </x-jet-nav-link>
                 @endcan
 
 

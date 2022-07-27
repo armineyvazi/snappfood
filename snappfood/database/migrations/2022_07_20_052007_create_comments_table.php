@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreignIdFor(Restaurantowner::class);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Carts::class);
+            $table->string('name');
+            $table->string('foodName');
             $table->boolean('report')->default(false);
             $table->string('answer')->nullable();
             $table->string('message');
@@ -31,7 +33,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

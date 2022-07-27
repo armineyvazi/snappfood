@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Models\Comment;
+use App\Models\CartItem;
+use App\Models\api\Carts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCommentsRequest;
-use App\Http\Requests\IndexCommentRequest;
 use App\Http\Resources\CommentResource;
-use App\Models\api\Carts;
-use App\Models\Comment;
+use App\Http\Requests\IndexCommentRequest;
+use App\Http\Requests\StoreCommentsRequest;
 use App\Models\resturantowner\ResturantFoods;
 
 class CommentController extends Controller
@@ -40,8 +41,14 @@ class CommentController extends Controller
     public function store(StoreCommentsRequest $request)
     {
         $feilds=$request->validated();
+        $cart=Carts::where('user_id', auth()->user()->id)->where('ispay', true)->where('id', $feilds['cart_id'])?->first();
+        $cartItem=CartItem::where('carts_id', $feilds['cart_id'])->get();
 
-        $cart=Carts::where('id',$feilds['cart_id'])->where('ispay',1)?->first();
+        foreach ($cartItem as $key =>$value) {
+
+            $foodsName[]=$value['foods_name'];
+        }
+        $foodsName=implode(',', $foodsName);
 
         if (!is_null($cart)) {
 
@@ -50,10 +57,12 @@ class CommentController extends Controller
             'restaurantowner_id'=>$cart->restaurantowner_id,
             'carts_id'=>$cart->id,
             'report'=>0,
+            'foodName'=>$foodsName,
+            'name'=>$cart->user->name,
             'answer'=>'',
             'message'=>$feilds['message'],
             'score'=>$feilds['score'],
-                ];
+            ];
             Comment::create($data);
 
             return response(['msg'=>'comment created successfully'], 200);

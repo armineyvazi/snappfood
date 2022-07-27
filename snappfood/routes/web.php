@@ -5,7 +5,9 @@ use App\Http\Controllers\admin\FoodsCategoryController;
 use App\Http\Controllers\resturantowner\ResturantownerFoods;
 use App\Http\Controllers\resturantowner\RestaurantownerController;
 use App\Http\Controllers\admin\ResturantCategoryController;
+use App\Http\Controllers\resturantowner\ArchiveController;
 use App\Http\Controllers\CallendersController;
+use App\Http\Controllers\resturantowner\CustomerReviewsController;
 use App\Http\Controllers\resturantowner\OrdersController;
 use App\Models\resturantowner\Restaurantowner;
 use Illuminate\Support\Facades\Route;
@@ -55,5 +57,9 @@ Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () 
     Route::resource('shedules',CallendersController::class);//=>
     Route::get('orders',[OrdersController::class,'create']);
     Route::post('orders',[OrdersController::class,'update']);
+    Route::get('archives',[ArchiveController::class,'index']);//Route For Get archives
+    Route::get('customerreviews',[CustomerReviewsController::class,'index']);//=>custom comment
+    Route::post('customerreviews/comment',[CustomerReviewsController::class,'update']);//for add comment resturant
+
 
 });

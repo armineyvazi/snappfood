@@ -25,7 +25,8 @@ class UpdateCommentRequest extends FormRequest
     {
         return [
             'id'=>'integer',
-            'reply'=>'string',
+            'reply' =>'string',
+            'report'=>'string',
         ];
     }
 }

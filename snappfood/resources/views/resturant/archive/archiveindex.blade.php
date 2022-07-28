@@ -18,7 +18,8 @@
        {{-- {{ dd($archive) }} --}}
        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
            <form action="{{ url('restaurantowners/archives') }}" method="get">
-               <select name="date" onchange="this.form.submit()" class="w-40 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+               <select name="date" onchange="this.form.submit()" value="all"class="w-40 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                   <option  value="all">select</option>
                    <option  value="all">All Archive</option>
                    <option  value="week">Last Week</option>
                    <option  value="month">Last Month</option>

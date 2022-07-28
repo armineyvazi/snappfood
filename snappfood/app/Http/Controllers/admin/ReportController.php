@@ -4,16 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\User;
 use App\Models\Comment;
-use App\Jobs\NotProblemJob;
-use Illuminate\Http\Request;
 use App\Jobs\ReportCommentJob;
 use App\Jobs\NotProblemcommentJob;
 use App\Http\Controllers\Controller;
-use App\Jobs\ResponesToRestaurantJob;
 use App\Jobs\DeleteCustomerCommentJob;
-use App\Jobs\EmailDeletCustomerCommentJob;
 use App\Http\Requests\ReportControllerRequest;
-use App\Models\resturantowner\Restaurantowner;
 
 class ReportController extends Controller
 {

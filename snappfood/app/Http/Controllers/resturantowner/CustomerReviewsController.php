@@ -34,13 +34,13 @@ class CustomerReviewsController extends Controller
         }
         if(($search)>0 ){
 
-           $nameFood=$nameFood=ResturantFoods::where('id',$search)->where('restaurantowner_id',$resturant_id)?->first()->name ?? false;
+           $nameFood=ResturantFoods::where('id',$search)->where('restaurantowner_id',$resturant_id)?->first()->name ?? false;
 
            $nameFood ? $comment=Comment::where('foodName','REGEXP',$nameFood.',.+')->where('restaurantowner_id',$resturant_id)?->get():$comment=[];
 
         }
         if(($search)=='all'){
-            
+
             $comment=Comment::where('restaurantowner_id',$resturant_id)?->get();
         }
         return view('resturant.comment.commentindex',compact('comment','category'));

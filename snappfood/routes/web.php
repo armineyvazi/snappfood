@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DiscountsController;
 use App\Http\Controllers\admin\FoodsCategoryController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\resturantowner\ResturantownerFoods;
 use App\Http\Controllers\resturantowner\RestaurantownerController;
 use App\Http\Controllers\admin\ResturantCategoryController;
@@ -46,6 +47,8 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function (){
     Route::resource('foodscategory', FoodsCategoryController::class);//=>foodscategory/FoodsController
     Route::resource('resturantcategory', ResturantCategoryController::class);//=>resturantcategory/ResturantCategoryController
     Route::resource('discounts', DiscountsController::class);//=>discounts/DiscountsController
+    Route::get('report',[ReportController::class,'index']);
+    Route::post('report',[ReportController::class,'checkComment']);
 });
 
 Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () {

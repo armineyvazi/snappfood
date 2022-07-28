@@ -31,6 +31,10 @@
                     <x-jet-nav-link href="{{ route('discounts.create') }}" :active="request()->routeIs('discounts.create')">
                         {{ __('Discounts') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ url('admin/report') }}" :active="request()->routeIs('ReportController@index')">
+                        {{ __('Report Comment') }}
+                    </x-jet-nav-link>
                 @endcan
 
 

@@ -9,10 +9,12 @@
     @endif
        <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center gap-4">
            <p>Search By Food : </p>
-           <form action="" method="get">
+           <form action="{{ url('/restaurantowners/customerreviews') }}" method="get">
                <select name="food" onchange="this.form.submit()" class="w-40 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                   <option  value="all">All Foods</option>
-                   <option value="Bad score">Bad score</option>
+                   <option  value="all">Select</option>
+                   <option  value="all">all</option>
+                   <option value="000">Bad score</option>
+                   <option value="00">Good score</option>
                    @foreach ($category as $category)
                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                    @endforeach
@@ -62,12 +64,16 @@
                <form action="{{ url("restaurantowners/customerreviews/comment") }}" method="post" >
                    @csrf
                    <input type="hidden" name="id" value="{{$comment->id}}">
+                <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" name="report" onchange="this.form.submit()" id="flexCheckIndeterminate">
+                        <label class="form-check-label inline-block text-gray-800" for="flexCheckIndeterminate">
+                            Report
+                        </label>
                    <div class="flex justify-between py-4 font-semibold dark:text-white items-center">
                        <div class="flex items-center gap-4"> <p>Write Your Response : </p> <input class="text-black rounded-lg" type="text" name="reply" onchange="this.form.submit()"> </div>
                    <div>
                    </div>
-                   </div>
-               </form>
+                </div>
+            </form>
        </ul>
   </div>
 </div>

@@ -35,6 +35,7 @@ class ReportController extends Controller
         switch ($confirm) {
 
             case 'delete':
+                Comment::find($id)->delete();
                 dispatch(new DeleteCustomerCommentJob($userEmail))->delay(now()->addSeconds(33));
                 dispatch(new ReportCommentJob($returantEmail))->delay(now()->addSeconds(33));
 
@@ -49,7 +50,7 @@ class ReportController extends Controller
             default:
                 abort(404);
                 break;
-            
+
         }
     }
 }

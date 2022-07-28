@@ -43,15 +43,12 @@ Route::middleware([
 * foods Category
 */
 Route::middleware(['isadmin'])->prefix('admin')->group(function (){
-
     Route::resource('foodscategory', FoodsCategoryController::class);//=>foodscategory/FoodsController
     Route::resource('resturantcategory', ResturantCategoryController::class);//=>resturantcategory/ResturantCategoryController
     Route::resource('discounts', DiscountsController::class);//=>discounts/DiscountsController
-
 });
 
 Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () {
-
     Route::resource('restaurantowner',RestaurantownerController::class);//=>profile/ProfileController
     Route::resource('foods',ResturantownerFoods::class);//=>foods/FoodsController
     Route::resource('shedules',CallendersController::class);//=>
@@ -60,6 +57,4 @@ Route::middleware(['resturant'])->prefix('restaurantowners')->group(function () 
     Route::get('archives',[ArchiveController::class,'index']);//Route For Get archives
     Route::get('customerreviews',[CustomerReviewsController::class,'index']);//=>custom comment
     Route::post('customerreviews/comment',[CustomerReviewsController::class,'update']);//for add comment resturant
-
-
 });

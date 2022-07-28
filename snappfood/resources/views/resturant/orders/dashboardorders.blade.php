@@ -6,6 +6,8 @@
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
+
+
     @forelse ($orders as $order)
 
                 <div class=" p-4  bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-red-700">
@@ -71,9 +73,6 @@
                                                 </div>
 
                                                 <div class="items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    sum:{{ $order->sum }}
-                                                </div>
-                                                <div class="items-center text-base font-semibold text-gray-900 dark:text-white">
                                                     Orderstatus:{{ $order->orders_status }}
                                                 </div>
 
@@ -85,24 +84,11 @@
                                 @empty
                                 <h2 class="text-center font-bold font-sans text-xl">There is no Order For your Restaurant !</h2>
                                  @endforelse
-                                </div>
-                                ter text-base font-semibold text-gray-900 dark:text-white">
-                                    sum:{{ $order->sum }}
-                                </div>
-                                <div class="items-center text-base font-semibold text-gray-900 dark:text-white">
-                                    Orderstatus:{{ $order->orders_status }}
-                                </div>
 
                             </li>
 
                         </ul>
                 </div>
-                </div>
-                @empty
-                <h2 class="text-center font-bold font-sans text-xl">There is no Order For your Restaurant !</h2>
-                @endforelse
-                </div>
-
             </div>
         </div>
     </div>

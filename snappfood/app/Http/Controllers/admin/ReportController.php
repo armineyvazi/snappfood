@@ -22,7 +22,7 @@ class ReportController extends Controller
     public function checkComment(ReportControllerRequest $request)
     {
         $this->authorize('create',User::class);
-        
+
         $resturant_id=$request->validated()['id_restaurant'];
         $user_id=$request->validated()['id_user'];
         $returantEmail=User::find($resturant_id)->email;
@@ -42,7 +42,7 @@ class ReportController extends Controller
             case 'share':
                 Comment::find($id)->update(['report'=>false]);
                 dispatch(new NotProblemcommentJob( $returantEmail))->delay(now()->addSeconds(33));
-            return redirect('admin/report')->with('message','Comment is delete');
+            return redirect('admin/report')->with('message','Comment is check successfully');
             break;
 
             default:

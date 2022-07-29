@@ -7,7 +7,7 @@ use App\Http\Controllers\resturantowner\ResturantownerFoods;
 use App\Http\Controllers\resturantowner\RestaurantownerController;
 use App\Http\Controllers\admin\ResturantCategoryController;
 use App\Http\Controllers\resturantowner\ArchiveController;
-use App\Http\Controllers\CallendersController;
+use App\Http\Controllers\resturantowner\CallendersController;
 use App\Http\Controllers\resturantowner\CustomerReviewsController;
 use App\Http\Controllers\resturantowner\OrdersController;
 use App\Models\resturantowner\Restaurantowner;

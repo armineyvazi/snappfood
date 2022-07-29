@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCallenderRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Scope;
 
 class CallendersController extends Controller
 {
@@ -29,6 +30,7 @@ class CallendersController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Schedule::class);
         return view('resturant.profile.dashboardshedule');
     }
 
@@ -40,6 +42,8 @@ class CallendersController extends Controller
      */
     public function store(StoreCallendersRequest $request)
     {
+       $this->authorize('create',Schedule::class);
+
        $fields=$request->validated();
 
 
@@ -86,6 +90,7 @@ class CallendersController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create',Schedule::class);
         $data=Schedule::where('restaurantowner_id',User::find(auth()->user()->id)->resturant->user_id)->get()->first();
 
         return view('resturant.profile.dashboardsheduleupdate',compact('data'));
@@ -101,7 +106,7 @@ class CallendersController extends Controller
     public function update(UpdateCallenderRequest $request, $id)
     {
         $fields=$request->validated();
-
+        $this->authorize('create',Schedule::class);
         $data=array(
             'saturday'=>json_encode([$fields['sat-s'],$fields['sat-e']]),
             'sunday'=>json_encode([$fields['sun-s'],$fields['sun-e']]),

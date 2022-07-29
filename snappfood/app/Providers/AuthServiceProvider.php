@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\api\Schedule;
 use App\Policies\TeamPolicy;
 use App\Models\admin\Discounts;
 use App\Policies\DiscountsPolicy;
@@ -13,6 +14,7 @@ use App\Policies\FoodsCategoryPolicy;
 use App\Policies\ResturantFoodPolicy;
 use App\Models\admin\ResturantCategory;
 use App\Policies\RestaurantownerPolicy;
+use App\Policies\CalenderRestaurantPolicy;
 use App\Policies\RestaurantCategoryPolicy;
 use App\Models\resturantowner\ResturantFoods;
 use App\Policies\ReportAdminControllerPolicy;
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        
         Team::class => TeamPolicy::class,
         Discounts::class => DiscountsPolicy::class,
         FoodsCategory::class=>FoodsCategoryPolicy::class,
@@ -34,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         Restaurantowner::class=>RestaurantownerPolicy::class,
         ResturantFoods::class=>ResturantFoodPolicy::class,
         User::class=>ReportAdminControllerPolicy::class,
+        Schedule::class=>CalenderRestaurantPolicy::class,
 
     ];
 

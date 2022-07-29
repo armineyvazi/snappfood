@@ -29,7 +29,7 @@ class StoreResturantownerFoods extends FormRequest
             'discounts'=>'nullable',
             'price'=>'required',
             'foodsparty'=>'required',
-            'image'=>'mimes:jpg,png,jpeg',
+            'image'=>'required|mimes:jpg,png,jpeg',
             'rawmaterial'=>'required',
         ];
     }

@@ -2,21 +2,22 @@
 
 namespace App\Providers;
 
-use App\Models\admin\Discounts;
-use App\Models\admin\FoodsCategory;
-use App\Models\admin\ResturantCategory;
-use App\Models\resturantowner\Restaurantowner;
-use App\Models\resturantowner\ResturantFoods;
 use App\Models\Team;
-use App\Policies\TeamPolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use App\Policies\TeamPolicy;
+use App\Models\admin\Discounts;
 use App\Policies\DiscountsPolicy;
+use App\Models\admin\FoodsCategory;
+use Illuminate\Support\Facades\Gate;
 use App\Policies\FoodsCategoryPolicy;
-use App\Policies\RestaurantCategoryPolicy;
-use App\Policies\RestaurantownerPolicy;
 use App\Policies\ResturantFoodPolicy;
+use App\Models\admin\ResturantCategory;
+use App\Policies\RestaurantownerPolicy;
+use App\Policies\RestaurantCategoryPolicy;
+use App\Models\resturantowner\ResturantFoods;
+use App\Policies\ReportAdminControllerPolicy;
+use App\Models\resturantowner\Restaurantowner;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         ResturantCategory::class=>RestaurantCategoryPolicy::class,
         Restaurantowner::class=>RestaurantownerPolicy::class,
         ResturantFoods::class=>ResturantFoodPolicy::class,
+        User::class=>ReportAdminControllerPolicy::class,
 
     ];
 

@@ -14,12 +14,15 @@ class ReportController extends Controller
 {
     public function index()
     {
+        $this->authorize('create',User::class);
         $comment=Comment::where('report',true)->paginate();
 
         return view('admin.report.reportindex',compact('comment'));
     }
     public function checkComment(ReportControllerRequest $request)
     {
+        $this->authorize('create',User::class);
+        
         $resturant_id=$request->validated()['id_restaurant'];
         $user_id=$request->validated()['id_user'];
         $returantEmail=User::find($resturant_id)->email;
@@ -45,7 +48,6 @@ class ReportController extends Controller
             default:
                 abort(404);
                 break;
-
         }
     }
 }

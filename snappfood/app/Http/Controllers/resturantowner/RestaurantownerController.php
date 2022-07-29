@@ -47,7 +47,6 @@ class RestaurantownerController extends Controller
     */
     public function store(StoreRestaurantownerRequest $request ,Restaurantowner $restaurantowner)
     {
-       // dd($request->all());
        $this->authorize('view',$restaurantowner);
        $request->validated();
 

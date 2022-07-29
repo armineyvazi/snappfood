@@ -33,6 +33,9 @@ class AddressController extends Controller
     }
     public function update(Request $request,Address $address)
     {
+
+        $this->authorize('update',$address);
+
         $fields = $request->validate(['id'=>'required']);
 
         $id=$fields['id'];

@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\api\Address;
 use App\Models\api\Schedule;
 use App\Policies\TeamPolicy;
 use App\Models\admin\Discounts;
+use App\Policies\AddressPolicy;
 use App\Policies\DiscountsPolicy;
 use App\Models\admin\FoodsCategory;
 use Illuminate\Support\Facades\Gate;
@@ -29,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        
+
         Team::class => TeamPolicy::class,
         Discounts::class => DiscountsPolicy::class,
         FoodsCategory::class=>FoodsCategoryPolicy::class,
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         ResturantFoods::class=>ResturantFoodPolicy::class,
         User::class=>ReportAdminControllerPolicy::class,
         Schedule::class=>CalenderRestaurantPolicy::class,
+        Address::class=>AddressPolicy::class,
 
     ];
 

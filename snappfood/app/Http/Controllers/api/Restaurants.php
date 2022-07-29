@@ -17,12 +17,9 @@ class Restaurants extends Controller
 {
     public function index($id)
     {
-      $dataRestaurant=Restaurantowner::where('id',$id)->get()->first();
+        $dataRestaurant=Restaurantowner::where('id',$id)->get()?->first()??null;
 
-      if($dataRestaurant==null)
-        return response(['mes'=>'Not found']);
-
-    return ResturantsResourse::make($dataRestaurant);
+        return $dataRestaurant ? ResturantsResourse::make($dataRestaurant):response(['mes'=>'Not found']);
 
     }
     public function search(RestaurantSearchApiRequest $request,Restaurantowner $restaurantowner)

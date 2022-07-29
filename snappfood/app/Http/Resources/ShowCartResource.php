@@ -19,10 +19,10 @@ class ShowCartResource extends JsonResource
             "id" => $this->id,
             "restaurantowner_id" => $this->restaurantowner_id,
             "resturant_foods_id" => $this->resturant_foods_id,
-             "user_id" => $this->user_id,
-             "count" => $this->count,
-
-
+            "user_id" => $this->user_id,
+            "ispay"=>$this->ispay,
+            'created_at'=>$this->created_at,
+            'updated_at'=>$this->updated_at,
         ];
     }
 }

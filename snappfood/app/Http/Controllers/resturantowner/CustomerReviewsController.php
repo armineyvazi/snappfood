@@ -14,6 +14,7 @@ class CustomerReviewsController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('is_restaurant');
         $comment=[];
 
         $nameFood=[];
@@ -49,6 +50,8 @@ class CustomerReviewsController extends Controller
 
     public function update(UpdateCommentRequest $request)
     {
+        $this->authorize('is_restaurant');
+        
         $report=$request->validated()['report']??null;
 
         $id=$request->validated()['id'];

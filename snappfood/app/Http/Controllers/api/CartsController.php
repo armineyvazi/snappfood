@@ -159,11 +159,11 @@ class CartsController extends Controller
     {
         $field=$request->validated();
 
-        $cart=Carts::where('user_id', auth()->user()->id)->where('ispay', false)->where('id', $field['cart_id'])->first();
+        $cart=Carts::where('user_id', auth()->user()->id)->where('ispay', false)->where('id', $field['cart_id'])?->first()??null;
 
         $user=User::where('id', auth()->user()->id)->first();
 
-        $order=Orders::where('user_id', auth()->user()->id)->where('restaurantowner_id',$cart->restaurantowner_id)?->first();
+        $order=$cart ? Orders::where('user_id', auth()->user()->id)->where('restaurantowner_id',$cart->restaurantowner_id)?->first():null;
 
         $cartItem=CartItem::where('carts_id', $field['cart_id'])->get();
 
@@ -178,7 +178,7 @@ class CartsController extends Controller
         $foodsName=implode(',', $foodsName);
         $foodsCount=implode(',', $foodsCount);
 
-        if (is_null($order))
+        if (!is_null($order))
         {
             $data=array_merge([
             'carts_id'=>$cart->id,

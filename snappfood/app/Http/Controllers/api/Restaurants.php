@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\FoodsCategoryResources;
-use App\Http\Resources\ResturantsResourse;
-use App\Models\resturantowner\Restaurantowner;
-use App\Models\admin\FoodsCategory;
 use App\Models\api\Schedule;
-use App\Models\resturantowner\ResturantFoods;
 use Illuminate\Http\Request;
+use App\Models\admin\FoodsCategory;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ResturantsResourse;
+use App\Models\resturantowner\ResturantFoods;
+use App\Http\Resources\FoodsCategoryResources;
+use App\Models\resturantowner\Restaurantowner;
+use App\Http\Requests\RestaurantSearchApiRequest;
 
 
 class Restaurants extends Controller
@@ -24,24 +25,32 @@ class Restaurants extends Controller
     return ResturantsResourse::make($dataRestaurant);
 
     }
-    public function search(Request $request)
+    public function search(RestaurantSearchApiRequest $request,Restaurantowner $restaurantowner)
     {
-        $query = Restaurantowner::query();
+        $data=[];
+        $isOpen=$request->validated()['is_open'] ?? false;
+        $type=$request->validated()['type'] ??  false;
+        $score=$request->validated()['score_gt']  ?? false;
 
-        if (!is_null($request->isopen)) {
-            $query->where('isopen', $request->isopen);
-        }
-        if (!is_null($request->type)) {
-            $query->where('resturantcategory', $request->type);
-        }
-        if (!is_null($request->score)) {
-            $query->where('score', '>=', $request->score);
-        }
+        if (($isOpen)) {
 
+            $data=$restaurantowner->where('isopen','=',$isOpen)?->get();
+
+        }
+        if (($type)) {
+
+            $data=$restaurantowner->where('resturantcategory', $type)?->get();
+
+        }
+        if (($score)) {
+
+            $data=$restaurantowner->where('score', '>=', $score)?->get();
+           
+
+        }
         // use laravel local scopes
-        $data = $query->get();
 
-        return response($data, 200);
+        return (!empty($data)) ? response($data, 200):response(['msg'=>'not found']);
     }
     public function resturantsFood($id)
     {

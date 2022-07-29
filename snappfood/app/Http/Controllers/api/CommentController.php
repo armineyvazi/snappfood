@@ -24,7 +24,7 @@ class CommentController extends Controller
 
            $comment=Comment::where('restaurantowner_id',$restaurant_id->restaurantowner_id)->with('user','foods')->get();//model
 
-           return !($comment->isEmpty()) ? CommentResource::collection($comment):response(['msg'=>'Not found']);
+           return !($comment->isEmpty()) ? CommentResource::collection($comment):response(['msg'=>'Not found comment for this food']);
 
         }
         else if(isset($fields['restaurant_id']))
@@ -32,7 +32,7 @@ class CommentController extends Controller
 
            $comment=Comment::where('restaurantowner_id',$fields['restaurant_id'])->with('user','foods')?->get();
 
-           return !($comment->isEmpty()) ? CommentResource::collection($comment):response(['msg'=>'Not found']);
+           return !($comment->isEmpty()) ? CommentResource::collection($comment):response(['msg'=>'Not found comment for this food']);
 
         }
 
@@ -67,6 +67,6 @@ class CommentController extends Controller
 
             return response(['msg'=>'comment created successfully'], 200);
         }
-        return response(['msg'=>'Sorry! Something went wrong! Please try again.'], 200);
+        return response(['msg'=>'Sorry! Please frist to pay cart! Please try again.'], 200);
     }
 }

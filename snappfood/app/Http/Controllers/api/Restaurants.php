@@ -34,23 +34,23 @@ class Restaurants extends Controller
 
         if (($isOpen)) {
 
-            $data=$restaurantowner->where('isopen','=',$isOpen)?->get();
+            $data=$restaurantowner->where('isopen','=',$isOpen)?->get()??false;
 
         }
         if (($type)) {
 
-            $data=$restaurantowner->where('resturantcategory', $type)?->get();
+            $data=$restaurantowner->where('resturantcategory','=',$type)?->get()??false;
 
         }
         if (($score)) {
 
-            $data=$restaurantowner->where('score', '>=', $score)?->get();
-           
+            $data=$restaurantowner->where('score', '>=', $score)?->get()??false;
+
 
         }
         // use laravel local scopes
 
-        return (!empty($data)) ? response($data, 200):response(['msg'=>'not found']);
+        return ($data) ? response($data, 200):response(['msg'=>'not found']);
     }
     public function resturantsFood($id)
     {
